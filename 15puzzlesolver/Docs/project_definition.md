@@ -2,17 +2,18 @@ Project Definition
 ==================
 Purpose
 -------
-The purpose of the project is to solve 15-puzzles with Java, if they are solvable in the first place.
+The purpose of the project is to solve 15-puzzles, and other n-puzzles, using Java, and initally check that they indeed are solvable.
 
 Algorithm
 ---------
-The puzzle should be solvable by using A* pathfinding algorith, or if memory becomes an issue one of its less memory intensive relatives, to find a path through intermediate states of the puzzle. Heuristic used will be the sum of the manhattan distances of each tile to their correct positions.
+The puzzle should be solvable by using IDA*-algorith, originally planned to use simple A*, which might still be implemented as an alternative if project advances faster than expected. Heuristic used is the Manhattan distance.
 
-To check the solvability of the puzzle, the sum of parity of permutations and the parity of the manhattan distance of empty tile from the lower right position must be even, otherwise the puzzle is unsolvabe.
+To check sovability of different puzzles, parity of the number of inversions in the gameboard and the parity of the empty square containing row are used.
 
 Data Structures
 ---------------
-Currently only complicated datastructure needed is the priority queue needed to keep track of the open set of gameboard states, with lowest estimated distance from starting state to end state having priority. It will be most likely be implemented with a minimum heap structure.
+
+Currently, most complicated datastructure needed is a stack structure needed to store the path created by IDA*, and a pair-datastructure, everything else can be implemented using simple arrays.
 
 I/O
 ---
