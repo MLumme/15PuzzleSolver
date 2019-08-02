@@ -8,6 +8,7 @@ Work done
 * Coded PuzzleState-class to store current permutation of the puzzle, and to provide methods for checking solvabilty of the puzzle, heuristic needed for pathfinding etc.
 * Coded Junit-tests for PuzzleState, everything seemingly working as intended.
 * Coded the IDA*-algorithm, using Javas implementation of ArrayDeque, but it has not been yet tested in any way, thus unknown if it will work as is. It should, but you never know.
+* All coding is done with expectation of an arbitrary size for game board, as long as it is square. Internally gameboard is stored as 1D-array.
 
 Problems
 --------
