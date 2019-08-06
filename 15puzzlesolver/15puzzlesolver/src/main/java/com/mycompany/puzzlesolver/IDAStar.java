@@ -7,14 +7,18 @@ import java.util.Deque;
 import javafx.util.Pair;
 
 public class IDAStar {
-    int inf = 999999999;
+    static int inf = 999999999;
     
     /**
      * Function for finding path from initial state to target state using IDA*
      * @param root PuzzleState of starting state
      * @return Deque path of states from initial state to final state
      */
-    public Deque<PuzzleState> runIDAStar(PuzzleState root) {
+    public static Deque<PuzzleState> runIDAStar(PuzzleState root) {
+        if (!root.isSolvable()) {
+            return null;
+        }
+        
         int bound = root.getManhattanHeuristic();
         Deque<PuzzleState> path = new ArrayDeque<>();
         Pair<Boolean, Integer> t;
@@ -37,7 +41,7 @@ public class IDAStar {
     }
     
     //function for the actual depth first search to maximum depth of bound
-    private Pair<Boolean, Integer> search(Deque<PuzzleState> path, int g, int bound) {
+    static Pair<Boolean, Integer> search(Deque<PuzzleState> path, int g, int bound) {
         PuzzleState state = path.peek();
         int f = g + state.getManhattanHeuristic();
         
@@ -52,6 +56,9 @@ public class IDAStar {
         PuzzleState[] children = state.getChildren();
         
         for (PuzzleState child: children) {
+            if (child == null) {
+                continue;
+            }
             
             boolean inPath = false;
             
@@ -69,7 +76,7 @@ public class IDAStar {
             path.push(child);
                     
             Pair<Boolean, Integer> t = search(path, g + 1, bound);
-                    
+            
             if (t.getKey()) {
                 return new Pair<>(true, f);
             } 

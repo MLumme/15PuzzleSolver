@@ -1,10 +1,6 @@
 
 package com.mycompany.puzzlesolver;
 
-/**
- *
- * @author Markus
- */
 public class PuzzleState {
     private int[] board;
     private int empty;
