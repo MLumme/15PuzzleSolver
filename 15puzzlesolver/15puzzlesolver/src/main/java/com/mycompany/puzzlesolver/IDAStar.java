@@ -1,10 +1,10 @@
 
 package com.mycompany.puzzlesolver;
 
+import com.mycompany.structs.Pair;
 import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Deque;
-import javafx.util.Pair;
 
 public class IDAStar {
     static int inf = 999999999;

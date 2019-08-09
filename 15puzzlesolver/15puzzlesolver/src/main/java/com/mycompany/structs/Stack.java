@@ -4,7 +4,7 @@ package com.mycompany.structs;
 import com.mycompany.puzzlesolver.PuzzleState;
 
 /**
- *An aray-based FIFO Stack
+ *An array-based LIFO Stack
  */
 public class Stack {
    private PuzzleState[] stack;

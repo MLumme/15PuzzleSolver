@@ -14,22 +14,6 @@ public class StackTest {
     public StackTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-
     @Test
     public void testEmptyStackSize() {
         Stack stack = new Stack();
