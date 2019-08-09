@@ -62,9 +62,7 @@ public class PuzzleState {
         
         for (int i = 0; i < board.length; i++) {
             if(board[i] != 0 && board[i] != i + 1) {
-                counter += (int) Math.abs(
-                    Math.floor((double) i / (double) size) - 
-                    Math.floor((double) board[i] / (double) size)) + 
+                counter += (int) Math.abs(i / size - board[i] / size) + 
                     Math.abs(i % size - ((board[i] - 1) % size));
             }
         }
@@ -77,7 +75,7 @@ public class PuzzleState {
      */
     public boolean isSolvable() {
         int inversions = countInversions();
-        int emptyRow = size - (int) Math.floor((double) empty / (double) size);
+        int emptyRow = size - empty / size;
         
         if (size % 2 == 0 && ((inversions % 2 != 0) != (emptyRow % 2 != 0))) {            
             return true;
