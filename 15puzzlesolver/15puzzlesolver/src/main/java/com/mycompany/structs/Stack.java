@@ -13,7 +13,7 @@ public class Stack {
    private int minCap = 10;
 
     /**
-     *Constructor for iniitializing stack, initial capacity 10 
+     *Constructor for initializing stack, initial capacity 10 
      */
     public Stack() {
         cap = 10;
@@ -113,5 +113,19 @@ public class Stack {
         }
 
         stack = newStack;
+    }
+    
+    public boolean contains(PuzzleState target) {
+        if (cap == 0) {
+            return false;
+        }
+        
+        for (int i = cap - 1; i >= 0; i--) {
+            if (stack[i].equals(target)) {
+                return true;
+            }
+        }
+        
+        return false;
     }
 }

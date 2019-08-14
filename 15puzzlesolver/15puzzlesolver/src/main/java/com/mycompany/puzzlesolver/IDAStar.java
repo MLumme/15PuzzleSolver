@@ -60,16 +60,20 @@ public class IDAStar {
                 continue;
             }
             
-            boolean inPath = false;
+//            boolean inPath = false;
+//            
+//            for (PuzzleState storedState: path) {
+//                if (Arrays.equals(storedState.getBoard(), child.getBoard())) {
+//                    inPath = true;
+//                    break;
+//                }
+//            }
+//            
+//            if (inPath) {
+//                continue;
+//            }
             
-            for (PuzzleState storedState: path) {
-                if (Arrays.equals(storedState.getBoard(), child.getBoard())) {
-                    inPath = true;
-                    break;
-                }
-            }
-            
-            if (inPath) {
+            if (path.contains(child)) {
                 continue;
             }
             

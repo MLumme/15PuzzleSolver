@@ -190,4 +190,31 @@ public class PuzzleState {
         
         return true;
     }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        
+        if (o == null) {
+            return false;
+        }
+        
+        if (this.getClass() != o.getClass()) {
+            return false;
+        }
+        
+        PuzzleState target = (PuzzleState) o;
+        
+        int[] targetBoard = target.getBoard();
+        
+        for (int i = 0; i < board.length; i++) {
+            if (board[i] != targetBoard[i]) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
 }
