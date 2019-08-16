@@ -1,23 +1,24 @@
 
 package com.mycompany.structs;
 
-import com.mycompany.puzzlesolver.PuzzleState;
+import com.mycompany.domain.PuzzleState;
 
 /**
  *An array-based LIFO Stack
+ * @param <T>
  */
-public class Stack {
-   private PuzzleState[] stack;
-   private int top;
-   private int cap;
-   private int minCap = 10;
+public class Stack<T> {
+    private Object[] stack;
+    private int top;
+    private int cap;
+    private int minCap = 10;
 
     /**
      *Constructor for initializing stack, initial capacity 10 
      */
     public Stack() {
         cap = 10;
-        stack = new PuzzleState[minCap];
+        stack = new Object[minCap];
         top = 0;
     }
     
@@ -47,12 +48,12 @@ public class Stack {
      * Peeks the element on top of the stack
      * @return PuzzleState last in
      */
-    public PuzzleState peek() {
+    public T peek() {
         if (top <= 0) {
             return null;
         }
         
-        return stack[top - 1];
+        return (T) stack[top - 1];
     }
     
     /**
@@ -60,18 +61,18 @@ public class Stack {
      * shrinks it to (cap-1)*2/3 to save memory
      * @return PuzzleState last in
      */
-    public PuzzleState pop() {
+    public T pop() {
         if (top == 0) {
             return null;
         }
         
         top--;
         
-        if(top < cap / 2) {
+        if (top < cap / 2) {
             shrink();
         }
         
-        return stack[top];
+        return (T) stack[top];
     }
     
     /**
@@ -106,7 +107,7 @@ public class Stack {
      * to it, replaces original stack with new
      */
     private void copyToNewStack() {
-        PuzzleState[] newStack = new PuzzleState[cap];
+        Object[] newStack = new Object[cap];
         
         for (int i = 0; i < top; i++) {
             newStack[i] = stack[i];
@@ -115,17 +116,36 @@ public class Stack {
         stack = newStack;
     }
     
-    public boolean contains(PuzzleState target) {
-        if (cap == 0) {
+    /**
+     * Checks if parameter is contained within stack
+     * @param target Object
+     * @return Boolean
+     */
+    public boolean contains(Object target) {
+        if (top == 0) {
             return false;
         }
         
-        for (int i = cap - 1; i >= 0; i--) {
+        for (int i = top - 1; i >= 0; i--) {
             if (stack[i].equals(target)) {
                 return true;
             }
         }
         
         return false;
+    }
+    
+    /**
+     * Outputs arrat containing currently stored objects, from first to last 
+     * @return Object[]
+     */
+    public Object[] toArray() {
+        Object[] output = new Object[top];
+                
+        for (int i = 0; i < top; i++) {
+            output[i] = stack[i];
+        }
+
+        return output;
     }
 }

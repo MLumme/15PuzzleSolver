@@ -1,11 +1,7 @@
 
 package com.mycompany.structs;
 
-import com.mycompany.puzzlesolver.PuzzleState;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import com.mycompany.domain.PuzzleState;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -16,21 +12,21 @@ public class StackTest {
     
     @Test
     public void testEmptyStackSize() {
-        Stack stack = new Stack();
+        Stack<PuzzleState> stack = new Stack<>();
         
         assertEquals(0, stack.size());
     }
     
     @Test
     public void testEmptyStackPeek() {
-        Stack stack = new Stack();
+        Stack<PuzzleState> stack = new Stack<>();
         
         assertEquals(null, stack.peek());
     }
     
     @Test
     public void testEmptyStackPop() {
-        Stack stack = new Stack();
+        Stack<PuzzleState> stack = new Stack<>();
         
         PuzzleState res = stack.pop();
         
@@ -39,7 +35,7 @@ public class StackTest {
 
     @Test
     public void testStackPushSizeInc() {
-        Stack stack = new Stack();
+        Stack<PuzzleState> stack = new Stack<>();
 
         PuzzleState in = new PuzzleState(new int[]{1, 2, 3, 4, 5, 6, 7, 0, 8});
         stack.push(in);        
@@ -49,7 +45,7 @@ public class StackTest {
     
     @Test
     public void testStackPeek() {
-        Stack stack = new Stack();
+        Stack<PuzzleState> stack = new Stack<>();
 
         PuzzleState in = new PuzzleState(new int[]{1, 2, 3, 4, 5, 6, 7, 0, 8});
         stack.push(in);
@@ -60,7 +56,7 @@ public class StackTest {
     
     @Test
     public void testStackPop() {
-        Stack stack = new Stack();
+        Stack<PuzzleState> stack = new Stack<>();
 
         PuzzleState in = new PuzzleState(new int[]{1, 2, 3, 4, 5, 6, 7, 0, 8});
         stack.push(in);
@@ -71,7 +67,7 @@ public class StackTest {
     
     @Test
     public void testStackGrowth() {
-        Stack stack = new Stack();
+        Stack<PuzzleState> stack = new Stack<>();
         boolean error = false;
         
         PuzzleState in = new PuzzleState(new int[]{1, 2, 3, 4, 5, 6, 7, 0, 8});
@@ -89,7 +85,7 @@ public class StackTest {
 
     @Test
     public void testStackShrinkage() {
-        Stack stack = new Stack();
+        Stack<PuzzleState> stack = new Stack<>();
         boolean error = false;
         
         PuzzleState in = new PuzzleState(new int[]{1, 2, 3, 4, 5, 6, 7, 0, 8});
@@ -107,5 +103,118 @@ public class StackTest {
         }
         
         assertFalse(error);
+    }
+
+    @Test
+    public void testContains1() {
+        Stack<PuzzleState> stack = new Stack<>();
+
+        PuzzleState in = new PuzzleState(new int[]{1, 2, 3, 4, 5, 6, 7, 0, 8});
+        stack.push(in);
+        
+        PuzzleState in2 = new PuzzleState(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 0});
+        stack.push(in2);
+
+        PuzzleState in3 = new PuzzleState(new int[]{1, 2, 3, 4, 5, 0, 7, 8, 6});
+        stack.push(in3);
+                
+        assertTrue(stack.contains(in2));   
+    }
+    
+    @Test
+    public void testContains2() {
+        Stack<PuzzleState> stack = new Stack<>();
+
+        PuzzleState in = new PuzzleState(new int[]{1, 2, 3, 4, 5, 6, 7, 0, 8});
+        stack.push(in);
+        
+        PuzzleState in2 = new PuzzleState(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 0});
+        stack.push(in2);
+
+        PuzzleState in3 = new PuzzleState(new int[]{1, 2, 3, 4, 5, 0, 7, 8, 6});
+        stack.push(in3);
+                
+        PuzzleState comp = new PuzzleState(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 0});
+        
+        assertTrue(stack.contains(comp));   
+    } 
+    
+    @Test
+    public void testContains3() {
+        Stack<PuzzleState> stack = new Stack<>();
+
+        PuzzleState in = new PuzzleState(new int[]{1, 2, 3, 4, 5, 6, 7, 0, 8});
+        stack.push(in);
+        
+        PuzzleState in2 = new PuzzleState(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 0});
+        stack.push(in2);
+
+        PuzzleState in3 = new PuzzleState(new int[]{1, 2, 3, 4, 5, 0, 7, 8, 6});
+        stack.push(in3);
+                
+        PuzzleState comp = new PuzzleState(new int[]{1, 2, 3, 4, 5, 6, 0, 7, 8});
+        
+        assertFalse(stack.contains(comp));   
+    }
+    
+    @Test
+    public void testContains4() {
+        Stack<PuzzleState> stack = new Stack<>();
+
+        PuzzleState in = new PuzzleState(new int[]{1, 2, 3, 4, 5, 6, 7, 0, 8});
+        stack.push(in);
+        
+        PuzzleState in2 = new PuzzleState(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 0});
+        stack.push(in2);
+
+        PuzzleState in3 = new PuzzleState(new int[]{1, 2, 3, 4, 5, 0, 7, 8, 6});
+        stack.push(in3);
+                        
+        assertFalse(stack.contains(null));   
+    }
+
+    @Test
+    public void testContains5() {
+        Stack<PuzzleState> stack = new Stack<>();
+
+        PuzzleState in = new PuzzleState(new int[]{1, 2, 3, 4, 5, 6, 7, 0, 8});
+        stack.push(in);
+        
+        PuzzleState in2 = new PuzzleState(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 0});
+        stack.push(in2);
+
+        PuzzleState in3 = new PuzzleState(new int[]{1, 2, 3, 4, 5, 0, 7, 8, 6});
+        stack.push(in3);
+                        
+        String comp = "Test";
+        
+        assertFalse(stack.contains(comp));   
+    }
+    
+    @Test
+    public void testContains6() {
+        Stack<PuzzleState> stack = new Stack<>();
+                        
+        String comp = "Test";
+        
+        assertFalse(stack.contains(comp));   
+    }    
+
+    @Test
+    public void testToArray() {
+        Stack<PuzzleState> stack = new Stack<>();
+
+        PuzzleState in = new PuzzleState(new int[]{1, 2, 3, 4, 5, 6, 7, 0, 8});
+        stack.push(in);
+        
+        PuzzleState in2 = new PuzzleState(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 0});
+        stack.push(in2);
+
+        PuzzleState in3 = new PuzzleState(new int[]{1, 2, 3, 4, 5, 0, 7, 8, 6});
+        stack.push(in3);
+        
+        Object[] res = stack.toArray();
+        
+        assertTrue(res.length == 3 && res[0] == in);   
     }    
 }

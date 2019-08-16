@@ -1,6 +1,11 @@
 
-package com.mycompany.puzzlesolver;
+package com.mycompany.domain;
 
+import java.util.Arrays;
+
+/**
+ * Class for storing a state for -puzzles gameboard
+ */
 public class PuzzleState {
     private int[] board;
     private int empty;
@@ -61,7 +66,7 @@ public class PuzzleState {
         int counter = 0;
         
         for (int i = 0; i < board.length; i++) {
-            if(board[i] != 0 && board[i] != i + 1) {
+            if (board[i] != 0 && board[i] != i + 1) {
                 counter += (int) Math.abs(i / size - board[i] / size) + 
                     Math.abs(i % size - ((board[i] - 1) % size));
             }
@@ -86,8 +91,10 @@ public class PuzzleState {
         return false;
     }
     
-    //Helper function to count the number of inversions on gameboard, ignoring 
-    //the empty square
+    /**
+    * Helper function to count the number of inversions on gameboard, ignoring 
+    * the empty square
+    */
     private int countInversions() {
         int counter = 0;
         for (int i = 0; i < board.length - 1; i++) {
@@ -101,6 +108,31 @@ public class PuzzleState {
         }
         
         return counter;
+    }
+    
+    /**
+     * Checks that given gameboard is a valid n-puzzle, by checking that it
+     * contains only numbers 0-n, each once and only once.
+     * @return Boolean
+     */
+    public boolean isValid() {
+        int[] counts = new int[board.length];
+        
+        for (int i = 0; i < board.length; i++) {
+            if (board[i] < 0 || board[i] >= board.length) {
+                return false;
+            }
+            
+            counts[board[i]]++;
+        }
+        
+        for (int i = 0; i < board.length; i++) {
+            if (counts[i] != 1) {
+                return false;
+            }
+        }
+        
+        return true;
     }
     
     /**

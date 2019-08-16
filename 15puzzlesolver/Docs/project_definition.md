@@ -8,7 +8,7 @@ Algorithm
 ---------
 The puzzle should be solvable by using IDA*-algorith, originally planned to use simple A*, which might still be implemented as an alternative if project advances faster than expected. Heuristic used is the Manhattan distance.
 
-To check sovability of different puzzles, parity of the number of inversions in the gameboard and the parity of the empty square containing row are used.
+To check solvability of different puzzles, parity of the number of inversions in the gameboard and the parity of the empty square containing row are used.
 
 Data Structures
 ---------------

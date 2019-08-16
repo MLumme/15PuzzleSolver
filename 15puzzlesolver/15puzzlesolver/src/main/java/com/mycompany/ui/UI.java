@@ -1,37 +1,45 @@
 
 package com.mycompany.ui;
 
-import java.util.Arrays;
+import com.mycompany.domain.PuzzleState;
+import com.mycompany.domain.Solver;
 import javafx.application.Application;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ *Class for operating JavaFX-based GUI
+ */
 public class UI extends Application {
     int size;
-    Parent root;
+    PuzzleState[] solution;
+    Stage mainStage;
     Alert dialogue;
     int[] puzzle;
     
     @Override
     public void start(Stage stage) {
+        mainStage = stage;
+        
         dialogue = new Alert(Alert.AlertType.ERROR);
         
-        constructPuzzle();
+        constructSizeScene();
         
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
         stage.show();
     }
     
-    private void constructSize() {
+    /**
+     * constructs the scene for requesting size of the puzzle
+     */
+    private void constructSizeScene() {
         VBox vb = new VBox();
         
         Label label = new Label("Edge length of puzzle?");
@@ -43,13 +51,12 @@ public class UI extends Application {
             try {
                 tempSize = Integer.parseInt(sizeField.getText());
                 
-                if (tempSize <= 0) {
-                    dialogue.setContentText("Edge length can't be less or equal to zero");
+                if (tempSize <= 1) {
+                    dialogue.setContentText("Edge length can't be less or equal to 1");
                     dialogue.show();
                 } else {
                     size = tempSize;
-                    System.out.println(size);
-                    constructPuzzle();
+                    constructPuzzleScene();
                 }  
             } catch (NumberFormatException ex) {
                 dialogue.setContentText("Unable to parse input as integer");
@@ -61,12 +68,15 @@ public class UI extends Application {
         vb.getChildren().add(sizeField);
         vb.getChildren().add(button);
         
-        root = vb;
+        Scene scene = new Scene(vb);
+        
+        mainStage.setScene(scene);
     }
     
-    private void constructPuzzle() {
-        size = 3;
-        
+    /**
+     * constructs scene for inputing the puzzle into an sizeXsize grid
+     */
+    private void constructPuzzleScene() {        
         VBox vb = new VBox();
         GridPane gp = new GridPane();
         TextField[][] puzzleArray = new TextField[size][size];
@@ -93,10 +103,59 @@ public class UI extends Application {
                     puzzle[i + j * size] = Integer.parseInt(puzzleArray[i][j].getText());
                 }
             }
+
+            PuzzleState initState = new PuzzleState(puzzle);
             
-            System.out.println(Arrays.toString(puzzle));
+            if (!initState.isValid()) {
+                dialogue.setContentText("Given puzzle invalid, "
+                        + "either incorrect or duplicate numbers present");
+                dialogue.show();
+            } else if (!initState.isSolvable()) {
+                dialogue.setContentText("Given puzzle is unsolvable");
+                dialogue.show();
+            } else if (initState.isFinal()) {
+                dialogue.setContentText("Given puzzle is already final state");
+                dialogue.show();
+            } else {
+                solution = Solver.solveIDAStar(initState);
+                constructSolutionScene();
+            }
         });
         
-        root = vb;
+        Scene scene = new Scene(vb);
+
+        mainStage.setScene(scene);        
+    }
+    
+    /**
+     * Constructs scene for showing some statistics for solution and moves needed
+     * to solve the puzzle.
+     */
+    private void constructSolutionScene() {
+        TextArea text = new TextArea();
+        
+        text.appendText("Initial estimate number of steps: " + solution[0].getManhattanHeuristic() + "\n");
+        text.appendText("Actual number of steps: " + (solution.length - 1) + "\n");
+        text.appendText("\n");
+        text.appendText("Steps to solution: \n");
+        for (int i = 0; i < solution.length - 1; i++) {
+            text.appendText("Move empty ");
+            
+            int move = solution[i + 1].getEmpty() - solution[i].getEmpty();
+            
+            if(move == -1) {
+                text.appendText("left\n");
+            } else if (move == 1) {
+                text.appendText("right\n");
+            } else if (move < -1) {
+                text.appendText("up\n");
+            } else {
+                text.appendText("down\n");
+            }           
+        }
+        
+        Scene scene = new Scene(text);
+        
+        mainStage.setScene(scene);
     }
 }

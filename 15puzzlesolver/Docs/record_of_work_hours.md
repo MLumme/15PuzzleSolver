@@ -9,4 +9,7 @@ Date    | Time | Task
 7.8     | 2    | Coding of Stack-class.
 8.8     | 2    | Made Stacks internal array change its capacity when needed, tests for Stack, coded Pair-class.
 9.8     | 3    | Expanded slightly line coverage for tests, this weeks documetation, attemted to make Stack use generic types, rollback until array creation for generic bit more clear.
-Total   | 29   |
+13.8    | 4    | Inital work on UI, added contains-method for Stack, equals-method for PuzzleState to enable contains to do its comparisons.
+15.8    | 5   | Testing for new method, fixing associated bugs. Finally modified Stack to be generic, with method naming following Deques method naming, and added a method for getting an array out of the stack, enabled IDA* to use homecooked stack, updated its test similarly.
+16.8    | 5   | Added a new class Solver between UI and IDAStar, converts IDAStars output to PuzzleState-array, planned to provide a selector for different solving algorithms. Contiunued work on UI, which provides finally running program which produces correct results according to testing, appearance not yet even remotely finalized. Updated documentation, added current Class-diagram.
+Total  | 42

@@ -1,6 +1,7 @@
 
-package com.mycompany.puzzlesolver;
+package com.mycompany.domain;
 
+import com.mycompany.domain.PuzzleState;
 import java.util.Arrays;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -127,7 +128,43 @@ public class PuzzleStateTest {
         
         assertArrayEquals(boardChild, children[0].getBoard());
     }
+    
+    @Test
+    public void testValidity1() {
+        int[] board = new int[]{2, 1, 4, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
+        
+        PuzzleState state = new PuzzleState(board);
+        
+        assertFalse(state.isValid());
+    }
+    
+    @Test
+    public void testValidity2() {
+        int[] board = new int[]{2, 1, 4, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 0, 0};
+        
+        PuzzleState state = new PuzzleState(board);
+        
+        assertFalse(state.isValid());
+    }
 
+    @Test
+    public void testValidity3() {
+        int[] board = new int[]{2, 1, 4, 3, 5, 6, 7, 8, 9, 10, 11, 8, 13, 14, 0, 0};
+        
+        PuzzleState state = new PuzzleState(board);
+        
+        assertFalse(state.isValid());
+    } 
+    
+    @Test
+    public void testValidity4() {
+        int[] board = new int[]{2, 1, 4, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0};
+        
+        PuzzleState state = new PuzzleState(board);
+        
+        assertTrue(state.isValid());
+    }     
+    
     @Test
     public void testSolvabiltyEven1() {
         int[] board = new int[]{2, 1, 4, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0};
@@ -217,4 +254,52 @@ public class PuzzleStateTest {
 
         assertFalse(state.isFinal());
     }
+    
+    @Test
+    public void testEquals1() {
+        int[] board = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0, 11, 12, 13, 14, 15};
+        
+        PuzzleState state = new PuzzleState(board);
+
+        assertTrue(state.equals(state));       
+    }
+    
+    @Test
+    public void testEquals2() {
+        int[] board = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0, 11, 12, 13, 14, 15};
+        
+        PuzzleState state = new PuzzleState(board);
+        PuzzleState comp = new PuzzleState(board);
+        
+        assertTrue(state.equals(comp));       
+    }    
+    
+    @Test
+    public void testEquals3() {
+        int[] board = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0, 11, 12, 13, 14, 15};
+        
+        PuzzleState state = new PuzzleState(board);
+        
+        assertFalse(state.equals(null));
+    }
+
+    @Test
+    public void testEquals4() {
+        int[] board = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0, 11, 12, 13, 14, 15};
+        
+        PuzzleState state = new PuzzleState(board);
+        
+        assertFalse(state.equals("Test"));
+    }   
+    
+    @Test
+    public void testEquals5() {
+        int[] board = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 10, 11, 12, 13, 14, 15};
+        int[] compBoard = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0, 11, 12, 13, 14, 15};
+        
+        PuzzleState state = new PuzzleState(board);
+        PuzzleState comp = new PuzzleState(compBoard);
+        
+        assertFalse(state.equals(comp));
+    }     
 }

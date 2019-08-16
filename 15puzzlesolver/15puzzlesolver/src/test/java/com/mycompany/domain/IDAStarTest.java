@@ -1,9 +1,10 @@
 
-package com.mycompany.puzzlesolver;
+package com.mycompany.domain;
 
+import com.mycompany.domain.IDAStar;
+import com.mycompany.domain.PuzzleState;
 import com.mycompany.structs.Pair;
-import java.util.ArrayDeque;
-import java.util.Deque;
+import com.mycompany.structs.Stack;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -15,7 +16,7 @@ public class IDAStarTest {
     @Test
     public void testSearchFinal() {
         PuzzleState root = new PuzzleState(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 0});
-        Deque<PuzzleState> path = new ArrayDeque<>();
+        Stack<PuzzleState> path = new Stack<>();
         
         path.push(root);
         
@@ -27,7 +28,7 @@ public class IDAStarTest {
     @Test
     public void testSearchFGreaterThanBound() {
         PuzzleState root = new PuzzleState(new int[]{1, 2, 3, 4, 5, 6, 7, 0, 8});
-        Deque<PuzzleState> path = new ArrayDeque<>();
+        Stack<PuzzleState> path = new Stack<>();
         
         path.push(root);
         
@@ -39,7 +40,7 @@ public class IDAStarTest {
     @Test
     public void testSearchFEqualsBound1() {
         PuzzleState root = new PuzzleState(new int[]{1, 2, 3, 4, 5, 6, 7, 0, 8});
-        Deque<PuzzleState> path = new ArrayDeque<>();
+        Stack<PuzzleState> path = new Stack<>();
         
         path.push(root);
         
@@ -51,7 +52,7 @@ public class IDAStarTest {
     @Test
     public void testRunIDAStarCatchUnsolvable() {
         PuzzleState root = new PuzzleState(new int[]{1, 2, 3, 4, 6, 5, 7, 8, 0});
-        Deque<PuzzleState> path = new ArrayDeque<>();
+        Stack<PuzzleState> path = new Stack<>();
       
         path = IDAStar.runIDAStar(root);
         
@@ -61,7 +62,7 @@ public class IDAStarTest {
     @Test
     public void testRunIDAStar1 () {
         PuzzleState root = new PuzzleState(new int[]{1, 2, 3, 4, 0, 5, 7, 8, 6});
-        Deque<PuzzleState> path = new ArrayDeque<>();
+        Stack<PuzzleState> path = new Stack<>();
       
         path = IDAStar.runIDAStar(root);
         
@@ -71,7 +72,7 @@ public class IDAStarTest {
     @Test
     public void testRunIDAStar2 () {
         PuzzleState root = new PuzzleState(new int[]{1, 7, 8, 2, 3, 5, 0, 6, 4});
-        Deque<PuzzleState> path = new ArrayDeque<>();
+        Stack<PuzzleState> path = new Stack<>();
       
         path = IDAStar.runIDAStar(root);
         
