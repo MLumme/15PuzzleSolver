@@ -4,16 +4,20 @@ package com.mycompany.ui;
 import com.mycompany.domain.PuzzleState;
 import com.mycompany.domain.Solver;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import com.mycompany.util.PuzzleGen;
 
 /**
  *Class for operating JavaFX-based GUI
@@ -28,6 +32,8 @@ public class UI extends Application {
     @Override
     public void start(Stage stage) {
         mainStage = stage;
+        mainStage.setMinHeight(100);
+        mainStage.setMinWidth(200);
         
         dialogue = new Alert(Alert.AlertType.ERROR);
         
@@ -41,9 +47,14 @@ public class UI extends Application {
      */
     private void constructSizeScene() {
         VBox vb = new VBox();
+        vb.setAlignment(Pos.CENTER);
+        vb.setFillWidth(false);
+        vb.setSpacing(5);
         
         Label label = new Label("Edge length of puzzle?");
+        
         TextField sizeField = new TextField();
+        
         Button button = new Button("Submit");
         
         button.setOnAction((event) -> {
@@ -78,9 +89,24 @@ public class UI extends Application {
      */
     private void constructPuzzleScene() {        
         VBox vb = new VBox();
+        vb.setAlignment(Pos.CENTER);
+        vb.setFillWidth(false);
+        vb.setSpacing(5);
+        
         GridPane gp = new GridPane();
+        
         TextField[][] puzzleArray = new TextField[size][size];
-        Button submit = new Button("Submit");
+        
+        HBox selectorbox = new HBox();
+        ToggleGroup selector = new ToggleGroup();
+        RadioButton idastar = new RadioButton("IDA*");
+        RadioButton iddfs = new RadioButton("IDDFS");
+        
+        idastar.setToggleGroup(selector);
+        idastar.setSelected(true);
+        iddfs.setToggleGroup(selector);
+        selectorbox.getChildren().add(idastar);
+        selectorbox.getChildren().add(iddfs);
         
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
@@ -91,10 +117,19 @@ public class UI extends Application {
                 puzzleArray[i][j] = tf;
             }
         }
+
+        Button genRandom = new Button("Generate random puzzle");
+        genRandom.setOnAction((event) -> {
+            puzzle = PuzzleGen.generate(size * size, 20).getBoard();
+            
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < size; j++) {
+                    puzzleArray[i][j].setText(Integer.toString(puzzle[i + j * size]));
+                }
+            }
+        });
         
-        vb.getChildren().add(gp);
-        vb.getChildren().add(submit);
-        
+        Button submit = new Button("Submit");       
         submit.setOnAction((event) -> {
             puzzle = new int[size * size];
             
@@ -117,10 +152,23 @@ public class UI extends Application {
                 dialogue.setContentText("Given puzzle is already final state");
                 dialogue.show();
             } else {
-                solution = Solver.solveIDAStar(initState);
+                int algo = 0;
+                
+                if(idastar.isSelected()) {
+                    algo = 1;
+                } else if (iddfs.isSelected()) {
+                    algo = 2;
+                }
+                solution = Solver.solve(initState, algo);
                 constructSolutionScene();
             }
         });
+        
+        vb.getChildren().add(gp);
+        vb.getChildren().add(genRandom);
+        vb.getChildren().add(selectorbox);
+        vb.getChildren().add(submit);
+
         
         Scene scene = new Scene(vb);
 
@@ -132,6 +180,11 @@ public class UI extends Application {
      * to solve the puzzle.
      */
     private void constructSolutionScene() {
+        VBox vb = new VBox();
+        vb.setAlignment(Pos.CENTER);
+        vb.setFillWidth(false);
+        vb.setSpacing(5);
+        
         TextArea text = new TextArea();
         
         text.appendText("Initial estimate number of steps: " + solution[0].getManhattanHeuristic() + "\n");
@@ -154,7 +207,15 @@ public class UI extends Application {
             }           
         }
         
-        Scene scene = new Scene(text);
+        Button reset = new Button("Reset");
+        reset.setOnAction((event) -> {
+            constructSizeScene();
+        });
+        
+        vb.getChildren().add(text);
+        vb.getChildren().add(reset);
+        
+        Scene scene = new Scene(vb);
         
         mainStage.setScene(scene);
     }

@@ -10,15 +10,30 @@ public class PuzzleState {
     private int[] board;
     private int empty;
     private int size;
+    private int cameFrom;
 
     /**
-     *Constructor for PuzzleState-class
+     * Constructor for PuzzleState-class when it was produced without preceeding state
      * @param board 1D int-array containing the puzzle state, in row-major order
      */
     public PuzzleState(int[] board) {
         this.board = board;
         this.size = (int) Math.sqrt(board.length);
         this.empty = locEmpty();
+        this.cameFrom = -1;
+    }
+    
+    /**
+     * Constructor for PuzzleState-class when it was produced as a child of former state
+     * @param board 1D int-array containing the puzzle state, in row-major order
+     * @param cameFrom integer denoting direction where empty was moved to
+     * produce current state
+     */
+    public PuzzleState(int[] board, int cameFrom) {
+        this.board = board;
+        this.size = (int) Math.sqrt(board.length);
+        this.empty = locEmpty();
+        this.cameFrom = cameFrom;
     }
 
     //Finds the index of empty square denoted by 0, otherwise return -1 to denote
@@ -138,31 +153,35 @@ public class PuzzleState {
     /**
      * Produces the possible children resulting from moving empty square, if
      * move would put square out of puzzle bounds it is replaced with null in the 
-     * array
+     * array, as is the case of state that would reproduce current states parent
      * @return 4-element array of PuzzleStates or null-values
      */
     public PuzzleState[] getChildren() {
         PuzzleState[] children = new PuzzleState[4];
         
-        if (empty < size) {
+        //move up if allowed
+        if (empty < size | cameFrom == 1) {
             children[0] = null;
         } else {
             children[0] = moveTile(0);
         }
         
-        if (empty >= size * (size - 1)) {
+        //move down
+        if (empty >= size * (size - 1) | cameFrom == 0) {
             children[1] = null;
         } else {
             children[1] = moveTile(1);
         }
         
-        if (empty == 0 || empty % size == 0) {
+        //move left
+        if (empty % size == 0 | cameFrom == 3) {
             children[2] = null;
         } else {
             children[2] = moveTile(2);
         }
         
-        if ((empty + 1) % size == 0) {
+        //move right
+        if ((empty + 1) % size == 0 | cameFrom == 2) {
             children[3] = null;
         } else {
             children[3] = moveTile(3);
@@ -171,7 +190,7 @@ public class PuzzleState {
         return children;
     }
     
-    //Helper that makes the tilemoves producing new states
+    //Helper that makes the tile moves producing new states
     private PuzzleState moveTile(int dir) {
         int[] newBoard = board.clone();
         
@@ -206,7 +225,7 @@ public class PuzzleState {
             }
         }
         
-        return new PuzzleState(newBoard);
+        return new PuzzleState(newBoard, dir);
     } 
     
     /**
