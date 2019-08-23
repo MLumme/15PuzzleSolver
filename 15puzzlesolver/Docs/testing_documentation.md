@@ -6,6 +6,8 @@ Testing is possible using both Pit and Jacoco, when using Pit several timeouts w
 Domain
 ======
 
+![Domain testing coverage](https://github.com/MLumme/15PuzzleSolver/blob/master/15puzzlesolver/Docs/Diagrams/domain.png)
+
 Solver
 ------
 
@@ -25,6 +27,8 @@ Additional, classes equals()-method is tested for different possible calls rangi
 
 Structs
 =======
+
+![Structs testing coverage](https://github.com/MLumme/15PuzzleSolver/blob/master/15puzzlesolver/Docs/Diagrams/structs.png)
 
 Pair
 ----
@@ -49,7 +53,7 @@ Not yet tested, tests WIP.
 UI
 ==
 
-UI will not be unit tested, due to my unfamiliarity of using JUnit to test JavaFX-derived classes.
+UI will not be unit tested, due to my unfamiliarity of using JUnit to test JavaFX-derived classes, so manual testing must suffice.
 
 Performance Testing
 ===================
