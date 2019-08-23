@@ -1,12 +1,15 @@
 
 package com.mycompany.domain;
 
+import com.mycompany.structs.Pair;
+import java.sql.Time;
+
 /**
  * Class bridging UI and solver algorithm(s)
  */
 public class Solver {
     
-    public static PuzzleState[] solve(PuzzleState initState, int algo) {
+    public static Pair<Long, PuzzleState[]> solve(PuzzleState initState, int algo) {
         switch (algo) {
             case 1:
                 return solveIDAStar(initState);
@@ -22,10 +25,16 @@ public class Solver {
      * @param initState PuzzleState containing initial state for gameboard
      * @return
      */
-    private static PuzzleState[] solveIDAStar(PuzzleState initState) {      
-        PuzzleState[] output = typeConversion(IDAStar.runIDAStar(initState).toArray());
+    private static Pair<Long, PuzzleState[]> solveIDAStar(PuzzleState initState) {
+        Long tInit = System.nanoTime();
         
-        return output;
+        Object[] o = IDAStar.runIDAStar(initState).toArray();
+        
+        Long tEnd = System.nanoTime();
+        
+        PuzzleState[] output = typeConversion(o);
+        
+        return new Pair<>(tEnd - tInit, output);
     }
 
     /**
@@ -33,10 +42,16 @@ public class Solver {
      * @param initState PuzzleState containing initial state for gameboard
      * @return
      */    
-    private static PuzzleState[] solveIDDFS(PuzzleState initState) {
-        PuzzleState[] output = typeConversion(IDDFS.runIDDFS(initState).toArray());
+    private static Pair<Long, PuzzleState[]> solveIDDFS(PuzzleState initState) {
+        Long tInit = System.nanoTime();
+
+        Object[] o = IDDFS.runIDDFS(initState).toArray();
         
-        return output;
+        Long tEnd = System.nanoTime();
+        
+        PuzzleState[] output = typeConversion(o);
+        
+        return new Pair<>(tEnd - tInit, output);
     }
     
     /**

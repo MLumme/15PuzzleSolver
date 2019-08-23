@@ -8,6 +8,13 @@
         </goals>
     </action>
     <action>
+        <actionName>CUSTOM-Jacoco</actionName>
+        <displayName>Jacoco</displayName>
+        <goals>
+            <goal>jacoco:report</goal>
+        </goals>
+    </action>    
+    <action>
         <actionName>CUSTOM-JavaDoc</actionName>
         <displayName>JavaDoc</displayName>
         <goals>

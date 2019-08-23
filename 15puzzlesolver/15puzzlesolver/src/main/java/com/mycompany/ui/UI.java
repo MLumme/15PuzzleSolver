@@ -3,6 +3,7 @@ package com.mycompany.ui;
 
 import com.mycompany.domain.PuzzleState;
 import com.mycompany.domain.Solver;
+import com.mycompany.structs.Pair;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -24,7 +25,7 @@ import com.mycompany.util.PuzzleGen;
  */
 public class UI extends Application {
     int size;
-    PuzzleState[] solution;
+    Pair<Long, PuzzleState[]> solution;
     Stage mainStage;
     Alert dialogue;
     int[] puzzle;
@@ -187,14 +188,15 @@ public class UI extends Application {
         
         TextArea text = new TextArea();
         
-        text.appendText("Initial estimate number of steps: " + solution[0].getManhattanHeuristic() + "\n");
-        text.appendText("Actual number of steps: " + (solution.length - 1) + "\n");
+        text.appendText("Initial estimate number of steps: " + solution.getValue()[0].getManhattanHeuristic() + "\n");
+        text.appendText("Actual number of steps: " + (solution.getValue().length - 1) + "\n");
+        text.appendText("Time elapsed in ms: " + solution.getKey() + "\n");
         text.appendText("\n");
         text.appendText("Steps to solution: \n");
-        for (int i = 0; i < solution.length - 1; i++) {
+        for (int i = 0; i < solution.getValue().length - 1; i++) {
             text.appendText("Move empty ");
             
-            int move = solution[i + 1].getEmpty() - solution[i].getEmpty();
+            int move = solution.getValue()[i + 1].getEmpty() - solution.getValue()[i].getEmpty();
             
             if(move == -1) {
                 text.appendText("left\n");

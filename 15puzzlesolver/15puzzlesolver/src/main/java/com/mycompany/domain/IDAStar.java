@@ -8,7 +8,7 @@ import com.mycompany.structs.Stack;
  * Class for running an IDA* based shortest path search
  */
 public class IDAStar {
-    static int inf = 999999999;
+    static int inf = Integer.MAX_VALUE;
     
     /**
      * Function for finding path from initial state to target state using IDA*

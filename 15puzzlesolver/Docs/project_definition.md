@@ -6,7 +6,9 @@ The purpose of the project is to solve 15-puzzles, and other n-puzzles, using Ja
 
 Algorithm
 ---------
-The puzzle should be solvable by using IDA*-algorith, originally planned to use simple A*, which might still be implemented as an alternative if project advances faster than expected. Heuristic used is the Manhattan distance.
+The puzzle should be solvable by using iterative deepening A*-algorith, originally planned to use simple A*, which might still be implemented as an alternative if project advances faster than expected. Heuristic used is the Manhattan distance.
+
+Secondary algorithm is in the form if iterative deepening depth first search (IDDFS), which should be suitable for comparing the effect of the use of a heuristic to prune nodes in the search, as IDA* is otherwise nearly identical to IDDFS.
 
 To check solvability of different puzzles, parity of the number of inversions in the gameboard and the parity of the empty square containing row are used.
 

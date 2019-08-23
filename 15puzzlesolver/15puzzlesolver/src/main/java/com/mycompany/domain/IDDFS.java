@@ -10,7 +10,7 @@ import java.util.Arrays;
  * depth first search
  */
 public class IDDFS {
-    static int inf = 999999999;
+    static int inf = Integer.MAX_VALUE;
     
     public static Stack<PuzzleState> runIDDFS(PuzzleState root) {
         if(!root.isValid() || !root.isSolvable()) {

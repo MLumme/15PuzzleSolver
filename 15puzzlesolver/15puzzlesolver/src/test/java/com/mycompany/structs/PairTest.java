@@ -1,18 +1,17 @@
 
 package com.mycompany.structs;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * Tests for Pairs constructor and getters
+ */
 public class PairTest {
-    
-    public PairTest() {
-    }
 
+    /**
+     * getter for key
+     */
     @Test
     public void testPairKeyGetter() {
         Pair<Boolean, Integer> pair = new Pair(true, 132);
@@ -20,6 +19,9 @@ public class PairTest {
         assertTrue(pair.getKey());
     }
     
+    /**
+     * getter for value
+     */
     @Test
     public void testPairValueGetter() {
         Pair<Boolean, Integer> pair = new Pair(true, 132);

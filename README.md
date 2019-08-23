@@ -4,6 +4,10 @@ Repository for course project for TiRaLabra 2019 late summer, a A*-based 15-puzz
 ## Documentation
 [Project Definition](https://github.com/MLumme/15PuzzleSolver/blob/master/15puzzlesolver/Docs/project_definition.md)
 
+[Testing Documentation](https://github.com/MLumme/15PuzzleSolver/blob/master/15puzzlesolver/Docs/testing_documentation.md)
+
+[Implementation Documentation](https://github.com/MLumme/15PuzzleSolver/blob/master/15puzzlesolver/Docs/implementation_documentation.md)
+
 [Record of Work Hours](https://github.com/MLumme/15PuzzleSolver/blob/master/15puzzlesolver/Docs/record_of_work_hours.md)
 
 ## Weekly reports
@@ -14,3 +18,5 @@ Repository for course project for TiRaLabra 2019 late summer, a A*-based 15-puzz
 [Week 3](https://github.com/MLumme/15PuzzleSolver/blob/master/15puzzlesolver/Docs/Weekly_reports/Week3.md)
 
 [Week 4](https://github.com/MLumme/15PuzzleSolver/blob/master/15puzzlesolver/Docs/Weekly_reports/Week4.md)
+
+[Week 5](https://github.com/MLumme/15PuzzleSolver/blob/master/15puzzlesolver/Docs/Weekly_reports/Week5.md)
