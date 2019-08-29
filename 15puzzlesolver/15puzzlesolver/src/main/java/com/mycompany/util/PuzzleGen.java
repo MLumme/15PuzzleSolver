@@ -2,7 +2,6 @@
 package com.mycompany.util;
 
 import com.mycompany.domain.PuzzleState;
-import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -41,7 +40,7 @@ public class PuzzleGen {
             
             children = tempChildren;
             
-            Random rand = new Random();
+            Random rand = new Random(System.currentTimeMillis());
             state = children[rand.nextInt(accepted)];
         }
         

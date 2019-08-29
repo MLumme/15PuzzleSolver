@@ -1,36 +1,39 @@
 package com.mycompany.util;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import com.mycompany.domain.PuzzleState;
 import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class PuzzleGenTest {
-    
-    public PuzzleGenTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    /**
+     * Test that returned board state contains correct sized board
+     */
+    @Test
+    public void puzzleGenReturnsCorrectSize() {
+        PuzzleState state = PuzzleGen.generate(25, 20);
+        
+        assertEquals(25, state.getBoard().length);
+    }
+    
+    /**
+     * Bit of an overkill, but as starting point is wanted endstate and legal moves 
+     * should never result into unusable state test must ensure that every possible
+     * move happens
+     */
+    @Test
+    public void puzzleGenReturnsValidAndSolvable() {
+        Boolean error = false;
+        
+        for (int i = 0; i < 20; i++) {
+            PuzzleState state = PuzzleGen.generate(25, 40);
+            
+            if (!state.isValid() || !state.isSolvable()) {
+                error = true;
+                break;
+            }
+        }
+        
+        assertFalse(error);
+    }
 }

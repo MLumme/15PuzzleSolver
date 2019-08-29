@@ -1,9 +1,7 @@
 
 package com.mycompany.domain;
 
-import com.mycompany.structs.Pair;
 import com.mycompany.structs.Stack;
-import java.util.Arrays;
 
 /**
  * Class for searching shortest path to goalstate using iterative deepening 
@@ -32,7 +30,11 @@ public class IDDFS {
         
         return null;
     }
-
+    /**
+     * function for the actual depth first search to maximum depth of bound,
+     * as distances between nodes are constant 1 bound is just decreased during 
+     * recursive calls
+     */
     static Boolean search(Stack<PuzzleState> path, int bound) {
         PuzzleState state = path.peek();
         

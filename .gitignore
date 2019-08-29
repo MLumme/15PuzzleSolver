@@ -23,3 +23,5 @@
 hs_err_pid*
 /15puzzlesolver/15puzzlesolver/target/
 /15puzzlesolver/15puzzlesolver/nbproject/
+*.DAT
+15puzzlesolver/15puzzlesolver/src/main/java/com/mycompany/main/CMDMain.java

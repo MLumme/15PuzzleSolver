@@ -40,8 +40,9 @@ public class IDAStar {
             bound = t.getValue();
         }
     }
-    
-    //function for the actual depth first search to maximum depth of bound
+    /**
+     * function for the actual depth first search to maximum depth of bound
+     */ 
     static Pair<Boolean, Integer> search(Stack<PuzzleState> path, int g, int bound) {
         PuzzleState state = path.peek();
         int f = g + state.getManhattanHeuristic();

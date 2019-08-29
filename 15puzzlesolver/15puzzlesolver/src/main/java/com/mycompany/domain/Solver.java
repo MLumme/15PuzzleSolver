@@ -2,7 +2,6 @@
 package com.mycompany.domain;
 
 import com.mycompany.structs.Pair;
-import java.sql.Time;
 
 /**
  * Class bridging UI and solver algorithm(s)

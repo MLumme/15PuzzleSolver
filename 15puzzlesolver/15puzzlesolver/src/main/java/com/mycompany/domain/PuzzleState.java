@@ -242,6 +242,11 @@ public class PuzzleState {
         return true;
     }
     
+    /**
+     * Equals-method to compare the positions of the numbers
+     * @param o target for comparison
+     * @return Boolean telling if equal
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {

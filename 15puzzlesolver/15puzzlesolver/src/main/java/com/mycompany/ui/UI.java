@@ -19,6 +19,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import com.mycompany.util.PuzzleGen;
+import java.util.Arrays;
 
 /**
  *Class for operating JavaFX-based GUI
@@ -65,6 +66,9 @@ public class UI extends Application {
                 
                 if (tempSize <= 1) {
                     dialogue.setContentText("Edge length can't be less or equal to 1");
+                    dialogue.show();
+                } else if (tempSize > 30) {
+                    dialogue.setContentText("Edge length limited to under 30 for usability reasons");
                     dialogue.show();
                 } else {
                     size = tempSize;
@@ -134,34 +138,40 @@ public class UI extends Application {
         submit.setOnAction((event) -> {
             puzzle = new int[size * size];
             
-            for (int i = 0; i < size; i++) {
-                for (int j = 0; j < size; j++) {
-                    puzzle[i + j * size] = Integer.parseInt(puzzleArray[i][j].getText());
+            try {
+                for (int i = 0; i < size; i++) {
+                    for (int j = 0; j < size; j++) {
+                        dialogue.setContentText("Unable to parse input as integer,"
+                                + " first error at row " + (i + 1) + ", col " + (j + 1));
+                        puzzle[i * size + j] = Integer.parseInt(puzzleArray[j][i].getText());
+                    }
                 }
-            }
 
-            PuzzleState initState = new PuzzleState(puzzle);
-            
-            if (!initState.isValid()) {
-                dialogue.setContentText("Given puzzle invalid, "
-                        + "either incorrect or duplicate numbers present");
+                PuzzleState initState = new PuzzleState(puzzle);
+
+                if (!initState.isValid()) {
+                    dialogue.setContentText("Given puzzle invalid, "
+                            + "either incorrect or duplicate numbers present");
+                    dialogue.show();
+                } else if (!initState.isSolvable()) {
+                    dialogue.setContentText("Given puzzle is unsolvable");
+                    dialogue.show();
+                } else if (initState.isFinal()) {
+                    dialogue.setContentText("Given puzzle is already final state");
+                    dialogue.show();
+                } else {
+                    int algo = 0;
+
+                    if(idastar.isSelected()) {
+                        algo = 1;
+                    } else if (iddfs.isSelected()) {
+                        algo = 2;
+                    }
+                    solution = Solver.solve(initState, algo);
+                    constructSolutionScene();
+                } 
+            } catch (NumberFormatException ex) {
                 dialogue.show();
-            } else if (!initState.isSolvable()) {
-                dialogue.setContentText("Given puzzle is unsolvable");
-                dialogue.show();
-            } else if (initState.isFinal()) {
-                dialogue.setContentText("Given puzzle is already final state");
-                dialogue.show();
-            } else {
-                int algo = 0;
-                
-                if(idastar.isSelected()) {
-                    algo = 1;
-                } else if (iddfs.isSelected()) {
-                    algo = 2;
-                }
-                solution = Solver.solve(initState, algo);
-                constructSolutionScene();
             }
         });
         
