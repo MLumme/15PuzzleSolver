@@ -4,6 +4,9 @@ import com.mycompany.domain.PuzzleState;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+/**
+ * Test class for PuzzleGen
+ */
 public class PuzzleGenTest {
 
     /**

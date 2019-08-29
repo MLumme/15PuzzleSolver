@@ -10,8 +10,13 @@ import com.mycompany.structs.Stack;
 public class IDDFS {
     static int inf = Integer.MAX_VALUE;
     
+    /**
+     * Method for running IDDFS for given root- or initial state.
+     * @param root initial state of the puzzle
+     * @return Stack containing root and states along the path to final state
+     */
     public static Stack<PuzzleState> runIDDFS(PuzzleState root) {
-        if(!root.isValid() || !root.isSolvable()) {
+        if (!root.isValid() || !root.isSolvable()) {
             return null;
         }
         
@@ -38,18 +43,14 @@ public class IDDFS {
     static Boolean search(Stack<PuzzleState> path, int bound) {
         PuzzleState state = path.peek();
         
-        if(bound == 0) {
+        if (bound == 0) {
             return state.isFinal();
         }
         
         PuzzleState[] children = state.getChildren();
         
         for (PuzzleState child: children) {
-            if (child == null) {
-                continue;
-            }
-            
-            if (path.contains(child)) {
+            if (child == null || path.contains(child)) {
                 continue;
             }
             

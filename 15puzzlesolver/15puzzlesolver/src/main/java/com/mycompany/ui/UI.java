@@ -19,7 +19,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import com.mycompany.util.PuzzleGen;
-import java.util.Arrays;
 
 /**
  *Class for operating JavaFX-based GUI

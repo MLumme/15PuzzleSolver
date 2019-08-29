@@ -8,6 +8,13 @@ import com.mycompany.structs.Pair;
  */
 public class Solver {
     
+    /**
+     * Method for passing initial puzzlestate to correct solver-algorithm,
+     * returns pair of time taken to find the solution and solution path.
+     * @param initState PuzzleState containing initial state of game
+     * @param algo int denoting used algorithm
+     * @return Pair<Long, PuzzleState[]> with execution time and solution path.
+     */
     public static Pair<Long, PuzzleState[]> solve(PuzzleState initState, int algo) {
         switch (algo) {
             case 1:

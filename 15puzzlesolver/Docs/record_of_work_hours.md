@@ -15,4 +15,6 @@ Date    | Time | Task
 21.8   | 6    | Added iterative deepening depth first search based solver to compare performase to IDA*, as IDA* is related but has increased performance from branch pruning from the use of heuristic to guide the search. Some cleanup of ui, added a method to generate random puzzles. Tests for IDDFS, pretty much copies of IDA*:s, slight adjustment to returns neded.
 22.8   | 3    | Testing and writing for peer code review.
 23.8   | 3    | Added commetary on tests to hopefully clarify their purpose. Documentation.
-Total  | 55
+27.8   | 4    | Fixed some of the noted UI-related issues in the peer review, added an secondary command line utilizing main-class for performance testing.
+29.8   | 4    | Performance testing, attempting to figure out what is going on with IDDFS-algorithm as far as speed is concerned. Structural UML-ish diagram for documentation. Added missing tests for solver. Added more commentary, fixed more of checkstyles warnings.
+Total  | 63

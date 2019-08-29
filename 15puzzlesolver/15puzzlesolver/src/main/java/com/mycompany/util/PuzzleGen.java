@@ -18,6 +18,8 @@ public class PuzzleGen {
     public static PuzzleState generate(int size, int moves) {
         int[] board = new int[size];
         board[size - 1] = 0;
+
+        Random rand = new Random(System.nanoTime());
         
         for (int i = 0; i < size - 1; i++) {
             board[i] = i + 1;
@@ -40,7 +42,6 @@ public class PuzzleGen {
             
             children = tempChildren;
             
-            Random rand = new Random(System.currentTimeMillis());
             state = children[rand.nextInt(accepted)];
         }
         

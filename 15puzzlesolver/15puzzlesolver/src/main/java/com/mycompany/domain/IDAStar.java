@@ -58,14 +58,10 @@ public class IDAStar {
         PuzzleState[] children = state.getChildren();
         
         for (PuzzleState child: children) {
-            if (child == null) {
+            if (child == null || path.contains(child)) {
                 continue;
             }
-            
-            if (path.contains(child)) {
-                continue;
-            }
-            
+
             path.push(child);
                     
             Pair<Boolean, Integer> t = search(path, g + 1, bound);

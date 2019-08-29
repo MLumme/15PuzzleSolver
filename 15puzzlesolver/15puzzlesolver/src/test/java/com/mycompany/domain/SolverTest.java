@@ -5,39 +5,49 @@
  */
 package com.mycompany.domain;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import com.mycompany.structs.Pair;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
 /**
- *
- * @author Markus
+ * Test class for testing Solver-class, testing only that calls work and returns
+ * correct objects with correct sized contents
  */
 public class SolverTest {
-    
-    public SolverTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    /**
+     * Test that IDAStar call returns something containing a expected sized array
+     */
+    @Test
+    public void testIDAStarCall() {
+        PuzzleState root = new PuzzleState(new int[]{1, 7, 8, 2, 3, 5, 0, 6, 4});
+
+        Pair<Long, PuzzleState[]> res = Solver.solve(root, 1);
+        
+        assertEquals(27, res.getValue().length);
+    }
+    
+    /**
+     * Test that IDDFS call returns something containing a expected sized array
+     */    
+    @Test
+    public void testIDDFSCall() {
+        PuzzleState root = new PuzzleState(new int[]{1, 7, 8, 2, 3, 5, 0, 6, 4});
+
+        Pair<Long, PuzzleState[]> res = Solver.solve(root, 2);
+        
+        assertEquals(27, res.getValue().length);        
+    }
+    
+    /**
+     * Test that calling nonexistent algorithm returns null
+     */
+    @Test
+    public void testWrongCall() {
+        PuzzleState root = new PuzzleState(new int[]{1, 7, 8, 2, 3, 5, 0, 6, 4});
+
+        Pair<Long, PuzzleState[]> res = Solver.solve(root, 3);
+        
+        assertEquals(null, res);        
+    }    
 }
