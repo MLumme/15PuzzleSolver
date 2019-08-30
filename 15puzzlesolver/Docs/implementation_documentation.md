@@ -1,6 +1,8 @@
 Program Structure
 =================
 
+![Class relation diagram](https://github.com/MLumme/15PuzzleSolver/blob/master/15puzzlesolver/Docs/Diagrams/UML2.png)
+
 Search Algorithms
 =================
 
