@@ -12,7 +12,7 @@ Work done
 
 Problems
 --------
-Attemted improvement of heuristic resulted into exactly opposite result than expected, hence why it is currently corraled into experimental branch, have some ideas how to maybe fix it, but remains to be seen. Also this is the reason performance testing has not yet been added to documentation, as it would be quite useless while refactoring the heuristic.
+Attempted improvement of heuristic resulted into exactly opposite result than expected, hence why it is currently corraled into experimental branch, have some ideas how to maybe fix it, but results remains to be seen. Also this is the reason performance testing has not yet been added to documentation, as it would be quite useless while refactoring the heuristic.
 
 Next week
 ---------
