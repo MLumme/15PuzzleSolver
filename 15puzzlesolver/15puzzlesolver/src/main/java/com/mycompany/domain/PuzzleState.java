@@ -1,16 +1,14 @@
 
 package com.mycompany.domain;
-
-import java.util.Arrays;
-
 /**
  * Class for storing a state for -puzzles gameboard
  */
 public class PuzzleState {
-    private int[] board;
-    private int empty;
-    private int size;
-    private int cameFrom;
+    private final int[] board;
+    private final int empty;
+    private final int size;
+    private final int cameFrom;
+    private int manhattanDistance;
 
     /**
      * Constructor for PuzzleState-class when it was produced without preceeding state
@@ -21,6 +19,7 @@ public class PuzzleState {
         this.size = (int) Math.sqrt(board.length);
         this.empty = locEmpty();
         this.cameFrom = -1;
+        this.manhattanDistance = -1;
     }
     
     /**
@@ -28,12 +27,14 @@ public class PuzzleState {
      * @param board 1D int-array containing the puzzle state, in row-major order
      * @param cameFrom integer denoting direction where empty was moved to
      * produce current state
+     * @param manhattanDistance updated during creation of children of parent state
      */
-    public PuzzleState(int[] board, int cameFrom) {
+    public PuzzleState(int[] board, int cameFrom, int manhattanDistance) {
         this.board = board;
         this.size = (int) Math.sqrt(board.length);
         this.empty = locEmpty();
         this.cameFrom = cameFrom;
+        this.manhattanDistance = manhattanDistance;
     }
 
     //Finds the index of empty square denoted by 0, otherwise return -1 to denote
@@ -78,15 +79,22 @@ public class PuzzleState {
      * @return int h-estimate
      */
     public int getManhattanHeuristic() {
-        int counter = 0;
-        
-        for (int i = 0; i < board.length; i++) {
-            if (board[i] != 0 && board[i] != i + 1) {
-                counter += (int) Math.abs(i / size - board[i] / size) + 
-                    Math.abs(i % size - ((board[i] - 1) % size));
-            }
+        if (manhattanDistance >= 0) {
+            return manhattanDistance;
         }
-        return counter;
+            int counter = 0;
+
+            for (int i = 0; i < board.length; i++) {
+                if (board[i] != 0 && board[i] != i + 1) {
+                    counter += (int) Math.abs(i / size - board[i] / size) + 
+                        Math.abs(i % size - ((board[i] - 1) % size));
+                }
+            }
+
+            manhattanDistance = counter;
+
+            return counter;
+        
     }
     
     /**
@@ -189,10 +197,12 @@ public class PuzzleState {
         
         return children;
     }
-    
-    //Helper that makes the tile moves producing new states
+    /**
+     *Helper that makes the tile moves producing new states
+    */
     private PuzzleState moveTile(int dir) {
         int[] newBoard = board.clone();
+        int newManhattanDistance;
         
         switch (dir) {
             case 0:
@@ -200,6 +210,8 @@ public class PuzzleState {
                 int temp = newBoard[empty - size];
                 newBoard[empty - size] = newBoard[empty];
                 newBoard[empty] = temp;
+                
+                newManhattanDistance = updatedManhattan(empty - size);
                 break;
             }
             case 1:
@@ -207,6 +219,8 @@ public class PuzzleState {
                 int temp = newBoard[empty + size];
                 newBoard[empty + size] = newBoard[empty];
                 newBoard[empty] = temp;
+                
+                newManhattanDistance = updatedManhattan(empty + size);
                 break;
             }
             case 2: 
@@ -214,6 +228,8 @@ public class PuzzleState {
                 int temp = newBoard[empty - 1];
                 newBoard[empty - 1] = newBoard[empty];
                 newBoard[empty] = temp;
+                
+                newManhattanDistance = updatedManhattan(empty - 1);            
                 break;
             }
             default:
@@ -221,12 +237,32 @@ public class PuzzleState {
                 int temp = newBoard[empty + 1];
                 newBoard[empty + 1] = newBoard[empty];
                 newBoard[empty] = temp;
+                
+                newManhattanDistance = updatedManhattan(empty + 1);                  
                 break;
             }
         }
         
-        return new PuzzleState(newBoard, dir);
-    } 
+        return new PuzzleState(newBoard, dir, newManhattanDistance);
+    }
+    
+    private int updatedManhattan(int oldPos) {
+        
+        if (Math.abs(empty - oldPos) > 1) {
+            int manhattanChange =
+                    (int) Math.abs(empty / size - board[oldPos] / size) - 
+                    (int) Math.abs(oldPos / size - board[oldPos] / size);
+
+            return Math.abs(manhattanDistance + manhattanChange);
+            
+        } else {
+            int manhattanChange =
+                    Math.abs(empty % size - ((board[oldPos] - 1) % size)) - 
+                    Math.abs(oldPos % size - ((board[oldPos] - 1) % size));  
+            
+            return Math.abs(manhattanDistance + manhattanChange);            
+        }
+    }
     
     /**
      * Check if current state of board is same as target state fo n-puzzle
