@@ -45,8 +45,9 @@ public class IDAStar {
      */ 
     static Pair<Boolean, Integer> search(Stack<PuzzleState> path, int g, int bound) {
         PuzzleState state = path.peek();
-        int f = g + state.getManhattanHeuristic();
         
+        int f = g + state.getManhattanHeuristic();
+                
         if (f > bound) {
             return new Pair<>(false, f);
         } else if (state.isFinal()) {

@@ -19,7 +19,8 @@ public class PuzzleState {
         this.size = (int) Math.sqrt(board.length);
         this.empty = locEmpty();
         this.cameFrom = -1;
-        this.manhattanDistance = -1;
+
+        computeManhattanHeuristic();
     }
     
     /**
@@ -74,27 +75,11 @@ public class PuzzleState {
     }
     
     /**
-     * Computes the Manhattan distance based distance estimation heuristic for 
-     * current board
+     * Getter for manhattan distance
      * @return int h-estimate
      */
     public int getManhattanHeuristic() {
-        if (manhattanDistance >= 0) {
-            return manhattanDistance;
-        }
-            int counter = 0;
-
-            for (int i = 0; i < board.length; i++) {
-                if (board[i] != 0 && board[i] != i + 1) {
-                    counter += (int) Math.abs(i / size - board[i] / size) + 
-                        Math.abs(i % size - ((board[i] - 1) % size));
-                }
-            }
-
-            manhattanDistance = counter;
-
-            return counter;
-        
+        return manhattanDistance;      
     }
     
     /**
@@ -246,6 +231,12 @@ public class PuzzleState {
         return new PuzzleState(newBoard, dir, newManhattanDistance);
     }
     
+    /**
+     * Method for calculating changes in manhattan distance during vreation of
+     * children
+     * @param oldPos current location of tile switching places with empty
+     * @return int updated manhattan distance for child
+     */
     private int updatedManhattan(int oldPos) {
         
         if (Math.abs(empty - oldPos) > 1) {
@@ -263,7 +254,23 @@ public class PuzzleState {
             return Math.abs(manhattanDistance + manhattanChange);            
         }
     }
-    
+
+    /**
+     * method for computing manhattan distance for entire array
+     */
+    private void computeManhattanHeuristic() {
+        int counter = 0;
+
+        for (int i = 0; i < board.length; i++) {
+            if (board[i] != 0 && board[i] != i + 1) {
+                counter += (int) Math.abs(i / size - board[i] / size) + 
+                    Math.abs(i % size - ((board[i] - 1) % size));
+            }
+        }
+
+        manhattanDistance = counter;        
+    }
+        
     /**
      * Check if current state of board is same as target state fo n-puzzle
      * @return boolean true if current state is same as goal
