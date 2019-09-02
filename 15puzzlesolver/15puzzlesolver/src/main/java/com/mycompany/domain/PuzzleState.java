@@ -82,7 +82,7 @@ public class PuzzleState {
         
         for (int i = 0; i < board.length; i++) {
             if (board[i] != 0 && board[i] != i + 1) {
-                counter += (int) Math.abs(i / size - board[i] / size) + 
+                counter += (int) Math.abs(i / size - (board[i] - 1) / size) + 
                     Math.abs(i % size - ((board[i] - 1) % size));
             }
         }
