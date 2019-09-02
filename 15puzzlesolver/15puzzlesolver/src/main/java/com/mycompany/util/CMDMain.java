@@ -88,7 +88,7 @@ public class CMDMain {
             
             while (counter < repeats) {                
                 PuzzleState init = PuzzleGen.generate(size * size, i);
-                
+  
                 //PuzzleState init = new PuzzleState(createKnownDistance(size, i));
                              
                 if (init.getManhattanHeuristic() == 0) {
@@ -96,7 +96,7 @@ public class CMDMain {
                 }
                 
                 Pair<Long, PuzzleState[]> res = Solver.solve(init, algo);
-                                
+
                 if (res.getValue().length == i + 1) {
                     average += res.getKey();
                     counter++;

@@ -17,5 +17,9 @@ Date    | Time | Task
 23.8   | 3    | Added commetary on tests to hopefully clarify their purpose. Documentation.
 27.8   | 4    | Fixed some of the noted UI-related issues in the peer review, added an secondary command line utilizing main-class for performance testing.
 29.8   | 4    | Performance testing, attempting to figure out what is going on with IDDFS-algorithm as far as speed is concerned. Structural UML-ish diagram for documentation. Added missing tests for solver. Added more commentary, fixed more of checkstyles warnings.
+<<<<<<< HEAD
 30.8   | 5    | Changed the way heuristics are calculated in attemt to cut unnecessary waste of processing time, refactored how it is done several times, and apparently did exactly opposite than hoped to, causing the program to slow down quite a lot, stored attempt into experimental branch for now.
+=======
+30.8   | 5    | Continued attemts to speed up program, currently stored in experimental branch as somehow the act of returning heuristic precomputed during creation of state children is slower than doing the said precomputing AND bruteforcing the heuristic rom scrach which is then returned?
+>>>>>>> 85f0c3e2cc8a951be1735da5f5601da943221421
 Total  | 68
