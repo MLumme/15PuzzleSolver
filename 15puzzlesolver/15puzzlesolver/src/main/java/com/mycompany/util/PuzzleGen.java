@@ -19,7 +19,7 @@ public class PuzzleGen {
         int[] board = new int[size];
         board[size - 1] = 0;
 
-        Random rand = new Random(System.nanoTime());
+        Random rand = new Random();
         
         for (int i = 0; i < size - 1; i++) {
             board[i] = i + 1;
