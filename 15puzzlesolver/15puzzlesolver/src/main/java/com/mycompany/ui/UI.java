@@ -66,8 +66,8 @@ public class UI extends Application {
                 if (tempSize <= 1) {
                     dialogue.setContentText("Edge length can't be less or equal to 1");
                     dialogue.show();
-                } else if (tempSize > 30) {
-                    dialogue.setContentText("Edge length limited to under 30 for usability reasons");
+                } else if (tempSize > 10) {
+                    dialogue.setContentText("Edge length limited to under 10 for usability reasons");
                     dialogue.show();
                 } else {
                     size = tempSize;
@@ -115,6 +115,7 @@ public class UI extends Application {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 TextField tf = new TextField();
+                tf.setMaxWidth(50);
                 
                 gp.add(tf, i, j);
                 
@@ -124,7 +125,7 @@ public class UI extends Application {
 
         Button genRandom = new Button("Generate random puzzle");
         genRandom.setOnAction((event) -> {
-            puzzle = PuzzleGen.generate(size * size, 20).getBoard();
+            puzzle = PuzzleGen.generate(size * size, size * size).getBoard();
             
             for (int i = 0; i < size; i++) {
                 for (int j = 0; j < size; j++) {
