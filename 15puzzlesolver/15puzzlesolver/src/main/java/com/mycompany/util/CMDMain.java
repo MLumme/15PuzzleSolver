@@ -88,13 +88,15 @@ public class CMDMain {
             
             while (counter < repeats) {                
                 PuzzleState init = PuzzleGen.generate(size * size, i);
-                                
+  
+                //PuzzleState init = new PuzzleState(createKnownDistance(size, i));
+                             
                 if (init.getManhattanHeuristic() == 0) {
                     continue;
                 }
                 
                 Pair<Long, PuzzleState[]> res = Solver.solve(init, algo);
-                
+
                 if (res.getValue().length == i + 1) {
                     average += res.getKey();
                     counter++;
@@ -117,5 +119,34 @@ public class CMDMain {
         } catch (IOException ex) {                
             System.out.println("error writing to file");
         }
-    }    
+    }
+
+    private static int[] createKnownDistance(int size, int dist) {
+        int[] board = new int[size * size];
+        int empty = board.length - 1;
+        
+        board[empty] = 0;
+        
+        for (int i = 0; i < empty; i++) {
+            board[i] = i + 1;
+        }
+        
+        for (int i = 0; i < dist; i++) {            
+            if (i % 2 == 0) {
+                swap(board, empty, empty - size);
+                empty -= size;
+            } else {
+                swap(board, empty, empty - 1);
+                empty--;
+            }            
+        }
+        
+        return board;
+    }
+    
+    private static void swap(int[] board, int first, int second) {
+        int temp = board[first];
+        board[first] = board[second];
+        board[second] = temp;
+    }
 }

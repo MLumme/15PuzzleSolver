@@ -1,5 +1,6 @@
 
 package com.mycompany.domain;
+
 /**
  * Class for storing a state for -puzzles gameboard
  */
@@ -241,8 +242,8 @@ public class PuzzleState {
         
         if (Math.abs(empty - oldPos) > 1) {
             int manhattanChange =
-                    (int) Math.abs(empty / size - board[oldPos] / size) - 
-                    (int) Math.abs(oldPos / size - board[oldPos] / size);
+                    (int) Math.abs(empty / size - (board[oldPos] - 1) / size) - 
+                    (int) Math.abs(oldPos / size - (board[oldPos] - 1) / size);
 
             return Math.abs(manhattanDistance + manhattanChange);
             
@@ -263,7 +264,7 @@ public class PuzzleState {
 
         for (int i = 0; i < board.length; i++) {
             if (board[i] != 0 && board[i] != i + 1) {
-                counter += (int) Math.abs(i / size - board[i] / size) + 
+                counter += (int) Math.abs(i / size - (board[i] - 1) / size) + 
                     Math.abs(i % size - ((board[i] - 1) % size));
             }
         }
