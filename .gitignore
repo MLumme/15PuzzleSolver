@@ -26,3 +26,4 @@ hs_err_pid*
 
 *.DAT
 
+/15puzzlesolver/15puzzlesolver/src/main/java/com/mycompany/util/BatchCMDMain.java

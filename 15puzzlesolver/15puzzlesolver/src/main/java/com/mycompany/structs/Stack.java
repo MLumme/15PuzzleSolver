@@ -1,8 +1,6 @@
 
 package com.mycompany.structs;
 
-import com.mycompany.domain.PuzzleState;
-
 /**
  *An array-based LIFO Stack
  * @param <T> type parameter
