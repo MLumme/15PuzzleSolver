@@ -69,7 +69,7 @@ public class PuzzleState {
 
     /**
      * Getter for the edge length of the puzzle in square form
-     * @return
+     * @return int size of array
      */
     public int getSize() {
         return size;

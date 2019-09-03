@@ -48,7 +48,7 @@ Util
 PuzzleGen
 ---------
 
-Not yet tested, tests WIP.
+Testing for PuzzleGent test only that returned puzzle is of correct size, and that returned puzzle is both valid, eg. no duplicate numbers or numbers of incorrect size, and solvable.
 
 UI
 ==
@@ -58,4 +58,8 @@ UI will not be unit tested, due to my unfamiliarity of using JUnit to test JavaF
 Performance Testing
 ===================
 
-Not yet, will compare the IDDFS and IDA* for some smallish n-puzzles, n over 15 starts to cause massive slowdowns in IDDFS due to the amount of possible states and duplication of them during the search.
+Testing was done by calculating the average time to compute solutions on both IDA* and IDDFS-algorithms over multiple solution depths, up to 40 steps in case of IDA*, and only up to 10 for IDDFS, due to its slowness. Time for each depth is the average of 200 randomly generated puzzles.
+
+As can be seen in attached figure, as expected, IDA*:s branch pruning produces significant performance increases when compared to IDDFS. As a purely illustrative comparison to theoretical performance O(b^d), I've added plots for branching factors b = 2 and b = 3, with tenous assumptions that theoretical performance can be tied to actual with equation t = k*b^d, and that constant k can be derived by estimating t to be approx. 1ms for testing machine at d = 1.
+
+![Performance testing](https://github.com/MLumme/15PuzzleSolver/blob/master/15puzzlesolver/Docs/Diagrams/Performances.png)

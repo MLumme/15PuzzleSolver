@@ -13,7 +13,7 @@ import java.util.Scanner;
  *
  *
  */
-public class CMDMain {
+public class BatchCMDMain {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         FileWriter out = null;

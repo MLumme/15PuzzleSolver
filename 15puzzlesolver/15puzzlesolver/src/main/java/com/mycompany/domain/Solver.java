@@ -13,7 +13,7 @@ public class Solver {
      * returns pair of time taken to find the solution and solution path.
      * @param initState PuzzleState containing initial state of game
      * @param algo int denoting used algorithm
-     * @return Pair<Long, PuzzleState[]> with execution time and solution path.
+     * @return Pair with execution time and solution path.
      */
     public static Pair<Long, PuzzleState[]> solve(PuzzleState initState, int algo) {
         switch (algo) {
@@ -29,7 +29,7 @@ public class Solver {
     /**
      * Solves n-puzzle using IDA*
      * @param initState PuzzleState containing initial state for gameboard
-     * @return
+     * @return Pair containing execution time and array of PuzzleStates 
      */
     private static Pair<Long, PuzzleState[]> solveIDAStar(PuzzleState initState) {
         Long tInit = System.nanoTime();
@@ -46,7 +46,7 @@ public class Solver {
     /**
      * Solves n-puzzle using IIDFS
      * @param initState PuzzleState containing initial state for gameboard
-     * @return
+     * @return Pair containing execution time and array of PuzzleStates 
      */    
     private static Pair<Long, PuzzleState[]> solveIDDFS(PuzzleState initState) {
         Long tInit = System.nanoTime();
@@ -62,8 +62,8 @@ public class Solver {
     
     /**
      * Converts Object[] to PuzzleState[]
-     * @param input Object[]
-     * @return PuzzleState[]
+     * @param input Object-array
+     * @return PuzzleState-array
      */
     private static PuzzleState[] typeConversion(Object[] input) {
         PuzzleState[] output = new PuzzleState[input.length];
