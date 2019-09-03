@@ -17,6 +17,7 @@ Solver has currently no test in place yet, WIP.
 
 Search algorithms IDAStar and IDDFS
 
+### Pathfinding algorithms IDA* and IDDFS
 
 Both classes have mostly identical tests, with IDAStar having few more due to its search()-methods need to return, in addition of the boolean denoting if final state has been reached, also its last f-value to update its bound before its next depth iteration. Both classes have some missed instructions due to the presence of somewhat hard to test end condition for the depth increasing iteration, which should stop if the bound of depth search reaches a very large value but is not expected to be reached in this application.
 
