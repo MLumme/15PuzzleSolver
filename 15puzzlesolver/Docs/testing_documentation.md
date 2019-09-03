@@ -12,10 +12,7 @@ Domain
 
 ### Solver
 
-
-Solver has currently no test in place yet, WIP.
-
-Search algorithms IDAStar and IDDFS
+Solver is tested for errorless operation when calling it for both search algorithms, and that it returns null of it is called for nonexisting algprithm index. 
 
 ### Pathfinding algorithms IDA* and IDDFS
 
