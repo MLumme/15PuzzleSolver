@@ -13,13 +13,13 @@ public class PuzzleGen {
      * Generates random n-puzzle
      * @param size length of puzzle board 
      * @param moves number of moves randomly taken starting from endstate
-     * @return
+     * @return PuzzleState with randomly generated initial state
      */
     public static PuzzleState generate(int size, int moves) {
         int[] board = new int[size];
         board[size - 1] = 0;
 
-        Random rand = new Random(System.nanoTime());
+        Random rand = new Random();
         
         for (int i = 0; i < size - 1; i++) {
             board[i] = i + 1;

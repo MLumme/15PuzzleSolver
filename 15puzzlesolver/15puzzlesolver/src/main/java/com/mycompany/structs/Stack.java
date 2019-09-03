@@ -5,13 +5,13 @@ import com.mycompany.domain.PuzzleState;
 
 /**
  *An array-based LIFO Stack
- * @param <T>
+ * @param <T> type parameter
  */
 public class Stack<T> {
     private Object[] stack;
     private int top;
     private int cap;
-    private int minCap = 10;
+    private final int minCap = 10;
 
     /**
      *Constructor for initializing stack, initial capacity 10 
@@ -33,14 +33,14 @@ public class Stack<T> {
     /**
      * Pushes the parameter PuzzleState on tope of the stack, if current 
      * capacity is reached increases it by 3/2*cap+1  
-     * @param state
+     * @param t object to push into stack
      */
-    public void push(PuzzleState state) {
+    public void push(T t) {
         if (top == cap) {
             grow();
         }
         
-        stack[top] = state;
+        stack[top] = t;
         top++;
     }
    

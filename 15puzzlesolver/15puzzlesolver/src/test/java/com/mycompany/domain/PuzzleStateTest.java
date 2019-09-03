@@ -306,7 +306,7 @@ public class PuzzleStateTest {
         
         PuzzleState state = new PuzzleState(board);
 
-        assertEquals(25, state.getManhattanHeuristic());
+        assertEquals(26, state.getManhattanHeuristic());
     } 
     
     /**

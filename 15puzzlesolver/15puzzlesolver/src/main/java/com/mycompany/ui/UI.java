@@ -66,8 +66,8 @@ public class UI extends Application {
                 if (tempSize <= 1) {
                     dialogue.setContentText("Edge length can't be less or equal to 1");
                     dialogue.show();
-                } else if (tempSize > 30) {
-                    dialogue.setContentText("Edge length limited to under 30 for usability reasons");
+                } else if (tempSize > 10) {
+                    dialogue.setContentText("Edge length limited to under 10 for usability reasons");
                     dialogue.show();
                 } else {
                     size = tempSize;
@@ -103,18 +103,24 @@ public class UI extends Application {
         
         HBox selectorbox = new HBox();
         ToggleGroup selector = new ToggleGroup();
-        RadioButton idastar = new RadioButton("IDA*");
-        RadioButton iddfs = new RadioButton("IDDFS");
         
+        RadioButton idastar = new RadioButton("IDA*");
         idastar.setToggleGroup(selector);
         idastar.setSelected(true);
-        iddfs.setToggleGroup(selector);
         selectorbox.getChildren().add(idastar);
-        selectorbox.getChildren().add(iddfs);
-        
+
+        //as iddfs is slow on larger pathsizes, limit its use to only 15-puzzles
+        //or below
+        RadioButton iddfs = new RadioButton("IDDFS");
+        if (size < 5) {
+            iddfs.setToggleGroup(selector);
+            selectorbox.getChildren().add(iddfs);
+        }
+   
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 TextField tf = new TextField();
+                tf.setMaxWidth(50);
                 
                 gp.add(tf, i, j);
                 
@@ -124,7 +130,7 @@ public class UI extends Application {
 
         Button genRandom = new Button("Generate random puzzle");
         genRandom.setOnAction((event) -> {
-            puzzle = PuzzleGen.generate(size * size, 20).getBoard();
+            puzzle = PuzzleGen.generate(size * size, size * size).getBoard();
             
             for (int i = 0; i < size; i++) {
                 for (int j = 0; j < size; j++) {
@@ -195,11 +201,26 @@ public class UI extends Application {
         vb.setFillWidth(false);
         vb.setSpacing(5);
         
+
+        
         TextArea text = new TextArea();
         
         text.appendText("Initial estimate number of steps: " + solution.getValue()[0].getManhattanHeuristic() + "\n");
         text.appendText("Actual number of steps: " + (solution.getValue().length - 1) + "\n");
-        text.appendText("Time elapsed in ms: " + solution.getKey() + "\n");
+        
+        //Change runtime magnitude from nano- to micro- or millisecond if long enough
+        long time = solution.getKey();        
+        if (time / 1e6 > 10) {
+            time = (new Double(time / 1e6)).longValue();
+            text.appendText("Time elapsed in ms: " + time + "\n");
+        } else if (time / 1e3 > 10) {
+            time = (new Double(time / 1e3)).longValue();
+            text.appendText("Time elapsed in us: " + time + "\n");
+        //should not trigger, but who knows
+        } else {
+            text.appendText("Time elapsed in ns: " + solution.getKey() + "\n");           
+        }
+        
         text.appendText("\n");
         text.appendText("Steps to solution: \n");
         for (int i = 0; i < solution.getValue().length - 1; i++) {
