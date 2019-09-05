@@ -3,8 +3,59 @@ Program Structure
 
 ![Class relation diagram](https://github.com/MLumme/15PuzzleSolver/blob/master/15puzzlesolver/Docs/Diagrams/UML2.png)
 
-Search Algorithms
-=================
+domain
+------
+
+### IDAStar
+
+Class for IDA*-search algorithm for finding shortest path trough the graph of puzzle configurations.
+
+### IDDFS
+
+Class for iterative deepening depth first search for finding shortest path trough the graph of puzzle configurations.
+
+### PuzzleState
+
+Class for storing states of the puzzle, responsible of computing/updating manhattan heuristic, produzong child-states, and remembernig the configuration of its parent board to avoid looping pack to it.
+
+### Solver
+
+Acts as a bridge between UI and the chosen pathfinding algorithm, additionally is responsible of converting algorithms output stack into simple array, and for computiong execution time of the search.
+
+main
+----
+
+### Main
+
+main class, does nothing else than starting the GUI.
+
+structs
+-------
+
+### Pair
+
+A simple replacement for Javas own Pair, made to use generic types.
+
+### Stack
+
+A implementation of a LIFO stack structure for the use of both the search algorithms, built on top of an array, which is grown and shrunk as elements are added or taken from the stack, replicating operation of Javas ArrayList.
+
+ui
+--
+
+### UI
+
+Class for JavaFX-based GUI.
+
+util
+----
+
+### PuzzleGen
+
+Class for generating random puzzles of given size and number of steps, uses a sort of random walk starting from solved state of the puzzle, and then randomly selecting one of the valid children of each successive gamestate-node as the next node, using PuzzleStates child generation.
+
+Used Search Algorithms
+======================
 
 IDDFS
 -----

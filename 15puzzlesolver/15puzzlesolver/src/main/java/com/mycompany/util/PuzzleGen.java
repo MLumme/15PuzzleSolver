@@ -2,7 +2,6 @@
 package com.mycompany.util;
 
 import com.mycompany.domain.PuzzleState;
-import java.util.Random;
 
 /**
  * Class for generating valid n-puzzles via randomly moving empty tile
@@ -19,7 +18,7 @@ public class PuzzleGen {
         int[] board = new int[size];
         board[size - 1] = 0;
 
-        Random rand = new Random();
+        XORShift rand = new XORShift();
         
         for (int i = 0; i < size - 1; i++) {
             board[i] = i + 1;

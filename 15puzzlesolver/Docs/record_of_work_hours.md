@@ -18,6 +18,8 @@ Date    | Time | Task
 27.8   | 4    | Fixed some of the noted UI-related issues in the peer review, added an secondary command line utilizing main-class for performance testing.
 29.8   | 4    | Performance testing, attempting to figure out what is going on with IDDFS-algorithm as far as speed is concerned. Structural UML-ish diagram for documentation. Added missing tests for solver. Added more commentary, fixed more of checkstyles warnings.
 30.8   | 5    | Changed the way heuristics are calculated in attemt to cut unnecessary waste of processing time, refactored how it is done several times, and apparently did exactly opposite than hoped to, causing the program to slow down quite a lot, stored attempt into experimental branch for now.
-3.9    | 6    | Continued trying to figure out the reason for slowdown caused by heuristic change, accidentaly stumbled on a missing subtraction in heuristic calculation which was the culprit, found during debuging modifications for batch testing utility when trying to find source of endless loops. Time includes aforementioned modifications.
+2.9    | 6    | Continued trying to figure out the reason for slowdown caused by heuristic change, accidentaly stumbled on a missing subtraction in heuristic calculation which was the culprit, found during debuging modifications for batch testing utility when trying to find source of endless loops. Time includes aforementioned modifications.
+3.9    | 3    | Performance testing of the algorithm, added to testing documentation. Cross-platform testing from Windows Netbeans to Linux Netbeans and mvn CLI, fixed multiple problems with pom.xml causing issues with Maven on CLI.
+4.9    | 2    | Added explanation of program file structure to implementation documentation. Did some research on replacing Java.util.random with something else.
 
-Total  | 74
+Total  | 77
