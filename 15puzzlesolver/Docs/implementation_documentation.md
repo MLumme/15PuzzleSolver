@@ -8,19 +8,19 @@ domain
 
 ### IDAStar
 
-Class for IDA*-search algorithm for finding shortest path trough the graph of puzzle configurations.
+Class for IDA*-search algorithm for finding shortest path through the graph of puzzle configurations.
 
 ### IDDFS
 
-Class for iterative deepening depth first search for finding shortest path trough the graph of puzzle configurations.
+Class for iterative deepening depth first search for finding shortest path through the graph of puzzle configurations.
 
 ### PuzzleState
 
-Class for storing states of the puzzle, responsible of computing/updating manhattan heuristic, produzong child-states, and remembernig the configuration of its parent board to avoid looping pack to it.
+Class for storing states of the puzzle, responsible of computing/updating Manhattan heuristic, producing child-states, and recalling the direction to its parent board to avoid looping pack to it.
 
 ### Solver
 
-Acts as a bridge between UI and the chosen pathfinding algorithm, additionally is responsible of converting algorithms output stack into simple array, and for computiong execution time of the search.
+Acts as a bridge between UI and the chosen pathfinding algorithm, additionally is responsible of converting algorithms output stack into simple array, and for computing the execution time of the search.
 
 main
 ----
@@ -54,13 +54,17 @@ util
 
 Class for generating random puzzles of given size and number of steps, uses a sort of random walk starting from solved state of the puzzle, and then randomly selecting one of the valid children of each successive gamestate-node as the next node, using PuzzleStates child generation.
 
+### XORShift
+
+Class to replace Javas own Random() used in PuzzleGen with XorShift-based RNG.
+
 Used Search Algorithms
 ======================
 
 IDDFS
 -----
 
-Iterative Deepening Depth First Search works by iteratively running depth limited depth first search in an attempt to find a route for the correct node, and if it is not found, limit depth is increased by one, old search is discarded, and the entire search is repeated again to the new depth. This algorithm is added as an alternative in the program as an comparison for the effect of IDA*:s heuristic.
+Iterative Deepening Depth First Search works by iteratively running depth limited depth first search in an attempt to find a route for the correct node, and if it is not found, limit depth is increased by one, old search is discarded, and the entire search is repeated again to the new depth. This algorithm is added as an alternative in the program as an comparison for the effect of IDA*'s heuristic.
 
 IDA*
 ----

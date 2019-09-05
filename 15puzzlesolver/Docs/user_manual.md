@@ -37,7 +37,7 @@ with report being generated in folder ``target/site/apidocs/index.html``.
 Packaging & Running
 -------------------
 
-Packaging the program ito a ```.jar`` by running
+Packaging the program into a ```.jar`` by running
 ```
 mvn package
 ```
@@ -51,6 +51,6 @@ Program usage
 
 When starting the program, the GUI first asks user to enter and submit the size of the puzzle, measured in the length of the edge of the game board, e.g. 15-puzzle has size 4, 8-puzzle 3, and so on. sizes are limited to greater than 1, and less than 8, due quickly increasing size of solution, and correspondingly the increase of solution time.
 
-Next view is the puzzle imput, where the user can either enter their own puzzle, or randomly generating a puzzle. Random generation attempts to change every tile in the puzzle. Additionally user can select which algorithm is used for solution, although IDDFS is disabled for 24-puzzle and above, due to its slowness at usual solution depth in generated puzzles of theese sizes.
+Next view is the puzzle input, where the user can either enter their own puzzle, or randomly generating a puzzle. Random generation attempts to change every tile in the puzzle. Additionally, user can select which algorithm is used for solution, although IDDFS is disabled for 24-puzzle and above, due to its slowness at usual solution depth in generated puzzles of these sizes.
 
-After submitting the puzzle, eventually user will be redirected to solution view, which lists the initial estimate of solution derived from manhattan heuristic, actual length of solution, time taken to solve the puzzle, and list of movements of the empty tile used to reach correct solution. Finally user can use reset-button to return to the start of the program.
+After submitting the puzzle, eventually user will be redirected to solution view, which lists the initial estimate of solution derived from Manhattan heuristic, actual length of solution, time taken to solve the puzzle, and list of movements of the empty tile used to reach correct solution. Finally, user can use reset-button to return to the start of the program.

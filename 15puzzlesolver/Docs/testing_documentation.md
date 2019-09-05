@@ -47,7 +47,11 @@ Util
 
 ### PuzzleGen
 
-Testing for PuzzleGent test only that returned puzzle is of correct size, and that returned puzzle is both valid, e.g. no duplicate numbers or numbers of incorrect size, and solvable.
+Testing for PuzzleGen test only that returned puzzle is of correct size, and that returned puzzle is both valid, e.g. no duplicate numbers or numbers of incorrect size, and solvable.
+
+### ZORShift
+
+Testing done for nextInt and nextLong by checking that average of 1e8 random numbers remains at the distance of MAXVAL*1e-4 from to confirm it is at least seemingly uniform. nextInt() tested with n=256 and n=300, testing that average is within 1 from the center of interval [0,n[, and none of the drawn values is outside of the interval.
 
 UI
 --
@@ -59,6 +63,6 @@ Performance Testing
 
 Testing was done by calculating the average time to compute solutions on both IDA* and IDDFS-algorithms over multiple solution depths, up to 40 steps in case of IDA*, and only up to 10 for IDDFS, due to its slowness. Time for each depth is the average of 200 randomly generated puzzles.
 
-As can be seen in attached figure, as expected, IDA*:s branch pruning produces significant performance increases when compared to IDDFS. As a purely illustrative comparison to theoretical performance O(b^d), I've added plots for branching factors b = 2 and b = 3, with tenuous assumptions that theoretical performance can be compared to actual with equation t = k*b^d, and that constant k can be derived by estimating t to be approx. 1ms for testing machine at d = 1.
+As can be seen in attached figure, as expected, IDA*'s branch pruning produces significant performance increases when compared to IDDFS. As a purely illustrative comparison to theoretical performance O(b^d), I've added plots for branching factors b = 2 and b = 3, with tenuous assumptions that theoretical performance can be compared to actual with equation t = k*b^d, and that constant k can be derived by estimating t to be approx. 1ms for testing machine at d = 1.
 
 ![Performance testing](https://github.com/MLumme/15PuzzleSolver/blob/master/15puzzlesolver/Docs/Diagrams/Performances.png)
