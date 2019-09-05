@@ -71,3 +71,25 @@ Expected Time- and Space-performance
 ------------------------------------
 
 Both IDDFS- and IDA*-algorithms have worst case performances of O(b^d) and space complexity of O(d), where b is the branching factor, ie. average number of child nodes for each node, and d is the depth of the search. In actuality, as noted above, IDA* will be faster than IDDFS due to the used heuristic directing the search towards the correct solution, while IDDFS searches the solution from every direction of the starting node, regardless if they are closer to goal or not.
+
+Sources
+=======
+
+N-puzzles:
+----------
+* 15-Puzzle: https://en.wikipedia.org/wiki/15_puzzle
+* Solvabilty of the Tiles Game: https://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html
+
+IDA*:
+-----
+* Iterative deepening A*: https://en.wikipedia.org/wiki/Iterative_deepening_A*
+* Depth-First Iterative-Deepening: An Optimal Admissible Tree Search https://www.cse.sc.edu/~mgv/csce580f09/gradPres/korf_IDAStar_1985.pdf
+
+IDDFS:
+------
+* Iterative deepening depth-first search: https://en.wikipedia.org/wiki/Iterative_deepening_depth-first_search
+* Depth-First Iterative-Deepening: An Optimal Admissible Tree Search: See above
+
+XORShift:
+---------
+Xorshift RNGs: https://www.jstatsoft.org/article/view/v008i14
