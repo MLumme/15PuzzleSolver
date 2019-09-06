@@ -56,7 +56,7 @@ Class for generating random puzzles of given size and number of steps, uses a so
 
 ### XORShift
 
-Class to replace Javas own Random() used in PuzzleGen with XorShift-based RNG.
+Class to replace Javas own Random() used in PuzzleGen with XorShift-based RNG in one of its simplest forms. 
 
 Used Search Algorithms
 ======================
@@ -75,6 +75,11 @@ Expected Time- and Space-performance
 ------------------------------------
 
 Both IDDFS- and IDA*-algorithms have worst case performances of O(b^d) and space complexity of O(d), where b is the branching factor, ie. average number of child nodes for each node, and d is the depth of the search. In actuality, as noted above, IDA* will be faster than IDDFS due to the used heuristic directing the search towards the correct solution, while IDDFS searches the solution from every direction of the starting node, regardless if they are closer to goal or not.
+
+Possible improvements
+=====================
+
+Currently solution path is stored in a stack, but I suppose it could be repalaced by storing an object reference to parent PuzzleState in each child state, as they already store information of their parent in form of a direction index. This would have the benefit of making implementing BFS or A* easier, although performance might slightly suffer from changing eliminating parents from list of child-states from simple conditional statements to checking PuzzleState equalities.
 
 Sources
 =======

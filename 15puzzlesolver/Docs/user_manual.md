@@ -17,7 +17,7 @@ with output going to folder ``target/site/jacoco/index.html``, while pit can be 
 ```
 mvn org.pitest:pitest-maven:mutationCoverage
 ```
-and output ``index.htlm`` within latest subfolder of folder ``target/pit-reports/``.
+and output ``index.htlm`` within latest subfolder of folder ``target/pit-reports/``. Note that some of the mutation tests will tile out.
 
 Checkstyle can be run with
 ```
