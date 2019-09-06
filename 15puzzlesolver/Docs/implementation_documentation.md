@@ -81,6 +81,8 @@ Possible improvements
 
 Currently solution path is stored in a stack, but I suppose it could be repalaced by storing an object reference to parent PuzzleState in each child state, as they already store information of their parent in form of a direction index. This would have the benefit of making implementing BFS or A* easier, although performance might slightly suffer from changing eliminating parents from list of child-states from simple conditional statements to checking PuzzleState equalities.
 
+Second, the way PuzzleState equalities are currently checked is usatisfactory, as currently entire array describing number positions is checked, would be better to construct some sort of hash function to test against and prune away unneeded testing of the full array, which at larger sizes would grow somewhat large, and would speed up tests for path intersections.
+
 Sources
 =======
 
