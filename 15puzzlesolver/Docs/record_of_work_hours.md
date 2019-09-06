@@ -23,4 +23,4 @@ Date    | Time | Task
 4.9    | 2    | Added explanation of program file structure to implementation documentation. Did some research on replacing Java.util.Random with something else.
 5.9    | 6     | Replaced inbuilt Random with XORShift-RNG, added testing, most of time used to understand what Java.util.Random:s nextInt(n) does to cram the output into wanted interval. Added user manual, made updates to rest of the documentation.
 6.9    | 3     | last additions to documentation, final tests to be absolutely certain everything works, including maven commands. Added release to GitHub.
-Total  | 83
+Total  | 86
