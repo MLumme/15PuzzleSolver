@@ -66,8 +66,8 @@ public class UI extends Application {
                 if (tempSize <= 1) {
                     dialogue.setContentText("Edge length can't be less or equal to 1");
                     dialogue.show();
-                } else if (tempSize > 10) {
-                    dialogue.setContentText("Edge length limited to under 10 for usability reasons");
+                } else if (tempSize > 8) {
+                    dialogue.setContentText("Edge length limited to under 8 for usability reasons");
                     dialogue.show();
                 } else {
                     size = tempSize;
