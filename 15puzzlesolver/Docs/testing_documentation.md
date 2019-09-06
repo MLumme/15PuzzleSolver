@@ -3,7 +3,7 @@ Unit Testing
 
 ![Domain testing coverage](https://github.com/MLumme/15PuzzleSolver/blob/master/15puzzlesolver/Docs/Diagrams/15puzzlesolver.png)
 
-Testing is possible using both Pit and Jacoco, when using Pit several timeouts will happen, mostly due to mutations causing the search algorithms outer search depth increasing loops to run their full length which should practically never happen.
+Test coverage testing is possible using both Pit and Jacoco, when using Pit several timeouts will happen, mostly due to mutations causing the search algorithms outer search depth increasing loops to run their full length which should practically never happen.
 
 Domain
 ------
@@ -12,7 +12,7 @@ Domain
 
 ### Solver
 
-Solver is tested for errorless operation when calling it for both search algorithms, and that it returns null of it is called for nonexisting algprithm index. 
+Solver is tested for errorless operation when calling it for both search algorithms, and that it returns null of it is called for nonexisting algorithm index. 
 
 ### Pathfinding algorithms IDA* and IDDFS
 
@@ -51,7 +51,7 @@ Testing for PuzzleGen test only that returned puzzle is of correct size, and tha
 
 ### ZORShift
 
-Testing done for nextInt and nextLong by checking that average of 1e8 random numbers remains at the distance of MAXVAL*0.5, to very generously say that it's even sort of uniform, although it might ocassionally fail test if the die fall unfavorably. nextInt() tested with n=256 and n=300, testing that average is within 1 from the center of interval [0,n[, and none of the drawn values is outside of the interval.
+Most of the ZORShift-tests only test that constructors work and somthing is returned, as originally I'd attemted to test that averages remain toward the center of the interval, but this being a random number generator, ocassionally average would escape the limits and fail the test, so I removed them, as testing a RNG requires bit more involved testing than its very limited use affords it here. NextInt(n) tested with n=256 and n=300, testing that none of the drawn values is outside of the interval.
 
 UI
 --

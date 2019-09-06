@@ -10,46 +10,44 @@ import static org.junit.Assert.*;
 public class XORShiftTest {
 
     /**
-     * Tests that XORShifts NextInt() output average remains at least within 1e-4
-     * times ints max value
-     */
+     * Tests that XORShifts NextInt() and constructor works, and same seed 
+     * produces same result
+    */
+   
     @Test
     public void testXORShiftNextInt() {
-        double a = 0;
-        XORShift rand = new XORShift();
+        XORShift rand1 = new XORShift(1324L);
+        int r1 = rand1.nextInt();
         
-        for (int i = 0; i < 1e8; i++) {
-            a += (double)rand.nextInt() / (double)1e8;
-        }
+        XORShift rand2 = new XORShift(1324L);
+        int r2 = rand2.nextInt();
         
-        assertTrue(Math.abs(a) < Integer.MAX_VALUE*1e-4);
+        assertTrue(r1 == r2);
     }
     
     /**
-     * Tests that XORShifts NextLong output average remains at least within 1e-4
-     * times longs max value 
+        * Tests that XORShifts NextLong() and constructor works, and same seed 
+     * produces same result
      */
     @Test
     public void testXORShiftNextLong() {
-        double a = 0;
-        XORShift rand = new XORShift();
+        XORShift rand1 = new XORShift(123456789L);
+        long r1 = rand1.nextLong();
         
-        for (int i = 0; i < 1e8; i++) {
-            a += (double)rand.nextLong() / (double)1e8;
-        }
+        XORShift rand2 = new XORShift(123456789L);
+        long r2 = rand2.nextLong();
         
-        assertTrue(Math.abs(a) < Long.MAX_VALUE*1e-4);
+        assertTrue(r1 == r2);
     }
     
     /**
-     * Test that both constructor with seed works, and that there aren't any
-     * values outside of set limit, and that average is approx. at the center 
-     * of the interval, when n is a power of 2.
+     * Test that both constructor without seed works, and that there aren't any
+     * values outside of set limit.
      */
     @Test
     public void testXORShiftNextIntParam1() {
        double a = 0;
-       XORShift rand = new XORShift(123456789L);
+       XORShift rand = new XORShift();
        
        int n = 256;
        boolean error = false;
@@ -61,17 +59,14 @@ public class XORShiftTest {
                 error = true;
                 break;
             }
-            
-            a += (double)r / (double) 1e8;
         }
         
-        assertTrue(!error && Math.abs(128 - a) < 1);
+        assertTrue(!error);
     }
     
     /**
      * Test that both constructor with seed works, and that there aren't any
-     * values outside of set limit, and that average is approx. at the center 
-     * of the interval, when n is not a power of 2.
+     * values outside of set limit.
      */
     @Test
     public void testXORShiftNextIntParam2() {
@@ -88,11 +83,9 @@ public class XORShiftTest {
                 error = true;
                 break;
             }
-            
-            a += (double)r / (double) 1e8;
         }
         
-        assertTrue(!error && Math.abs(149.5 - a) < 1);
+        assertTrue(!error);
     }  
     
     /**

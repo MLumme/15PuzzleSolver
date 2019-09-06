@@ -83,8 +83,6 @@ Currently solution path is stored in a stack, but I suppose it could be repalace
 
 Second, the way PuzzleState equalities are currently checked is usatisfactory, as currently entire array describing number positions is checked, would be better to construct some sort of hash function to test against and prune away unneeded testing of the full array, which at larger sizes would grow somewhat large, and would speed up tests for path intersections.
 
-Finally, testing for XORShift is atrocious, as two of them test that average of multiple random numbers is int the central 50% of Integer and Long ranges, which it might fail if the the generator happens to have a skewed run.
-
 Sources
 =======
 
