@@ -51,7 +51,7 @@ Testing for PuzzleGen test only that returned puzzle is of correct size, and tha
 
 ### ZORShift
 
-Testing done for nextInt and nextLong by checking that average of 1e8 random numbers remains at the distance of MAXVAL*1e-4 from to confirm it is at least seemingly uniform. nextInt() tested with n=256 and n=300, testing that average is within 1 from the center of interval [0,n[, and none of the drawn values is outside of the interval.
+Testing done for nextInt and nextLong by checking that average of 1e8 random numbers remains at the distance of MAXVAL*0.5, to very generously say that it's even sort of uniform, although it might ocassionally fail test if the die fall unfavorably. nextInt() tested with n=256 and n=300, testing that average is within 1 from the center of interval [0,n[, and none of the drawn values is outside of the interval.
 
 UI
 --
