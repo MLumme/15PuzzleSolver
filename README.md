@@ -12,6 +12,10 @@ Repository for course project for TiRaLabra 2019 late summer, a A*-based 15-puzz
 
 [Record of Work Hours](https://github.com/MLumme/15PuzzleSolver/blob/master/15puzzlesolver/Docs/record_of_work_hours.md)
 
+#Program
+
+[Release version](https://github.com/MLumme/15PuzzleSolver/releases/tag/Final)
+
 ## Weekly reports
 [Week 1](https://github.com/MLumme/15PuzzleSolver/blob/master/15puzzlesolver/Docs/Weekly_reports/Week1.md)
 
